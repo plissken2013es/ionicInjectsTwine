@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>La cuenta atrás</title>
+        <meta charset=utf-8>
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+                
+        <!--<script src="http://192.168.1.34:8080/target/target-script-min.js#anonymous"></script>-->
+        <style>
+            a,body{color:#222}
+            body{font:18px "Helvetica Neue",Helvetica,Arial,sans-serif}
+            #passage{max-width:38em;margin:0 auto;line-height:145%}
+            
+            a{text-decoration:none;border-bottom:2px solid #bbb}
+            a:hover{color:#cc8929;border-color:#cc8929}
+            a:active{color:#ffb040;border-color:#ffb040}
+            tw-storydata{display:none}
+            @media screen and (max-device-width:480px){
+                #passage{font-size:70%}
+            }
+        </style>
+        
+        <script src="css/styles.js"></script>
+    </head>
+
+    <body>
+        <div id="passage"></div>
+       
+       <tw-storydata name="La cuenta atrás" startnode="1" creator="Twine" creator-version="2.0.10" ifid="D1363650-EE8A-4A4C-AE42-C5D1FCB43F63" format="Snowman" options="" hidden>
+<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+	color: black;
+  background-color: lavender;
+	font-family: Monospace, Helvetica, sans-serif;
+	text-align: justify;
+}
+
+.invisible {
+	display: none;
+}
+
+a:hover {
+	background-color: greenyellow;
+}
+
+a.closed-exit:hover {
+	background-color: red;
+	cursor: not-allowed;
+}
+
+#wrapper {
+	margin-bottom: 100px;
+	padding-bottom: 50px;
+}
+
+#fake-passage {
+    max-width: 38em;
+    margin: 0 auto;
+    line-height: 145%;
+}
+
+#info-panel {
+    background-color: azure;
+    height: 50px;
+    position: fixed;
+    bottom: 50px;
+    width: 100%;
+}
+
+#info-panel img {
+    padding: 10px 2px;
+}
+
+#info-panel-title {
+    position: relative;
+    top: 13px;
+    left: 13px;
+    float: left;
+    width: 82px;
+}
+
+#event-window {
+    background-color: white;
+    opacity:    0.75; 
+    width:      100%;
+    height:     100%; 
+    z-index:    69;
+    top:        0; 
+    left:       0; 
+    position:   fixed; 
+}
+
+#clock, #hability-selection {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: relative;
+    text-align: center;
+}
+
+#close-hability-selection {
+    -webkit-transform: translateX(50px) translateY(-50px);
+    -ms-transform: translateX(50px) translateY(-50px);
+    transform: translateX(50px) translateY(-50px);
+}
+
+#habilities-panel {
+    background-color: khaki;
+    height: 50px;
+    line-height: 50px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#habilities-panel-title {
+    position: relative;
+    top: 2px;
+    left: 13px;
+    float: left;
+    width: 115px;
+}
+
+#lives {
+    float: right;
+    padding-right: 32px;
+    padding-top: 8px;
+}
+
+#habilities-panel-title2 {
+    position: relative;
+    top: 2px;
+    right: 5px;
+    float: right;
+    width: 50px;
+}
+
+.numberBtn {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #3498db;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.numberBtn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.noHover, .noHover:hover {
+    background: #3498db;
+    background-image: none;
+    cursor: default;
+}
+
+#hero {
+    position: absolute;
+    left: 50px;
+    top: 150px;
+}
+
+#map-panel {
+    background-color: khaki;
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+    cursor: pointer;
+}
+
+.map-collapsed {
+    -ms-transform: translate(-25%, -25%) scale(0.5, 0.5); /* IE 9 */
+    -webkit-transform: translate(-25%, -25%) scale(0.5, 0.5); /* Safari */
+    transform: translate(-25%, -25%) scale(0.5, 0.5);
+}
+
+/* --------------- enigmas --------------*/
+
+#solution-panel {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: relative;
+    text-align: center;
+}
+
+#solution-number {
+    
+}
+
+</style>
+
+<script role="script" id="twine-user-script" type="text/twine-javascript">$(window).on('showpassage', function(){
+	console.log('showpassage event', window.passage.name);
+	if (!story.state.isWrapperPresent) {
+		$("body").prepend("<div id='wrapper'></div>");
+		$("#wrapper").append("<div id='fake-passage'></div>");
+		$("#fake-passage").hide();
+        $("#wrapper").append("<div id='event-window'></div>");
+		$("#event-window").hide();
+        $("#wrapper").append("<div id='info-panel'></div>");
+        $("#wrapper").append("<div id='habilities-panel'></div>");
+        $("#wrapper").append("<div id='map-panel'></div>");
+        document.luisquin.init();
+		story.state.isWrapperPresent = true;
+	}
+});
+
+$(window).on('showpassage:after', function(){
+	console.log('showpassage:after event', window.passage.name, passage.tags);
+    console.log("passage has tag multi?", document.luisquin.passageHasTag(window.passage.name, "multi"));
+    console.log("passage has tag clock?", document.luisquin.passageHasTag(window.passage.name, "clock"));
+    
+    document.luisquin.checkIfTimePasses();
+    
+	var $el = $("#passage");
+	$("#passage").remove();
+	$("#wrapper").append($el);
+    $("#passage").children().each(function(i) {
+        $(this).hide();
+    });
+    $("#passage").show();
+    $("#passage").children().each(function(index) {
+        //console.log(index, $(this).text().match(/\w{1}/g).length, $(this).text());
+        var countWords = $(this).text().match(/\s{1}/g);
+        if (countWords) {
+            countWords = countWords.length;
+        } else {
+            countWords = 0;
+        }
+        $(this).delay((index+1)*1000).fadeIn(1500 + countWords*10);
+    });
+    var whichPassage = Number(passage.name);
+    if (isNaN(whichPassage)) whichPassage = 0;
+    story.state.alreadyVisited[whichPassage] = true;
+    document.luisquin.checkExits();
+    document.luisquin.drawMap();
+    document.luisquin.moveHero();
+});
+
+$(window).on('hidepassage', function() {
+	console.log('hidepassage event', window.passage.name);
+	var html = $("#passage").html();
+	$("#passage").hide();
+	$("#fake-passage").html($("#passage").html());
+	$("#fake-passage").show().fadeOut(1000);
+});
+
+
+document.luisquin = {
+    init: function() {
+        document.story = story;
+        story.state.vowels = ["a", "e", "i", "o", "u"];
+        story.state.consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
+        story.state.letterCodes = {
+            a: 1,
+            e: 2,
+            i: 3,
+            o: 4,
+            u: 5,
+            b: 6, c: 6, d: 6, f: 6,
+            g: 7, h: 7, j: 7, k: 7,
+            l: 8, m: 8, n: 8, ñ: 8,
+            p: 9, q: 9, r: 9, s: 9,
+            t: 10, v: 10, w: 10,
+            x: 11, y: 11, z: 11,
+        };
+        
+        story.state.cableCodes = [67, 62, 35, 44, 50, 4, 32];        
+        story.state.cableNames = ["ΣΚΠ", "ΨΣΛ", "ΚΡΛ", "ΦΩΨ", "ΔΠΣ", "ΨΛΩ", "ΦΔΩ"];
+        story.state.cableNames = document.luisquin.shuffleArray(story.state.cableNames);
+        
+        story.state.cables = [];
+        story.state.cablesOrdered = [];
+        for (var q=0; q<story.state.cableNames.length; q++) {
+            story.state.cablesOrdered.push({name: story.state.cableNames[q], target: story.state.cableCodes[q]});
+            story.state.cables.push({name: story.state.cableNames[q], target: story.state.cableCodes[q]});
+        }
+        story.state.cables = document.luisquin.shuffleArray(story.state.cables);
+        console.log("cables: ", story.state.cables, story.state.cablesOrdered);
+        
+        story.state.heroCoords = {
+            // down floor
+            12: {x: 50, y: 150, map: "down"},
+            22: {x: 150, y: 150, map: "down"},
+            43: {x: 270, y: 150, map: "down"},
+            40: {x: 420, y: 150, map: "down"},
+            59: {x: 30, y: 40, map: "down"},
+            17: {x: 130, y: 40, map: "down"},
+            38: {x: 250, y: 40, map: "down"},
+            52: {x: 380, y: 40, map: "down"},
+            56: {x: 520, y: 40, map: "down"},
+            5:  {x: 510, y: 280, map: "down"},
+            10: {x: 370, y: 280, map: "down"},
+            3:  {x: 230, y: 280, map: "down"},
+            54:  {x: 70, y: 280, map: "down"},
+            // up floor
+            8:  {x: 50, y: 150, map: "up"},
+            15: {x: 160, y: 150, map: "up"},
+            25: {x: 280, y: 170, map: "up"},
+            28: {x: 430, y: 170, map: "up"},
+            36: {x: 70, y: 50, map: "up"},
+            11: {x: 210, y: 50, map: "up"},
+            39: {x: 360, y: 50, map: "up"},
+            9:  {x: 510, y: 50, map: "up"},
+            41: {x: 80, y: 280, map: "up"},
+            31: {x: 270, y: 300, map: "up"},
+            33: {x: 370, y: 290, map: "up"},
+            47: {x: 510, y: 290, map: "up"},
+        };
+        story.state.lastMap = 12;
+        
+        story.state.hero = new Image();
+        story.state.hero.src = "http://www.luisquin.es/lq/laCuentaAtras/img/hero.png";
+        story.state.hero.setAttribute("id", "hero");
+        story.state.hero.setAttribute("style", "left: " + story.state.heroCoords[story.state.lastMap].x + "px; top: " + story.state.heroCoords[story.state.lastMap].y + "px;");
+        
+        story.state.map = {
+            down_floor: new Image(),
+            up_floor: new Image()
+        };
+        story.state.map.down_floor.src = "http://www.luisquin.es/lq/laCuentaAtras/img/down_floor.png";
+        story.state.map.down_floor.setAttribute("class", "map-image");
+        story.state.map.down_floor.setAttribute("id", "down_map");
+        story.state.map.up_floor.src = "http://www.luisquin.es/lq/laCuentaAtras/img/up_floor.png";
+        story.state.map.up_floor.setAttribute("class", "map-image");
+        story.state.map.up_floor.setAttribute("id", "up_map");
+        
+        story.state.objects = "";  // when full, is equal to "tzcpfse" in any possible order 
+        story.state.objectImages = {
+            t: new Image(),
+            z: new Image(),
+            c: new Image(),
+            p: new Image(),
+            f: new Image(),
+            s: new Image(),
+            e: new Image()
+        };
+        story.state.objectImages.t.src = "http://www.luisquin.es/lq/laCuentaAtras/img/t.png";
+        story.state.objectImages.z.src = "http://www.luisquin.es/lq/laCuentaAtras/img/z.png";
+        story.state.objectImages.c.src = "http://www.luisquin.es/lq/laCuentaAtras/img/c.png";
+        story.state.objectImages.p.src = "http://www.luisquin.es/lq/laCuentaAtras/img/p.png";
+        story.state.objectImages.f.src = "http://www.luisquin.es/lq/laCuentaAtras/img/f.png";
+        story.state.objectImages.s.src = "http://www.luisquin.es/lq/laCuentaAtras/img/s.png";
+        story.state.objectImages.e.src = "http://www.luisquin.es/lq/laCuentaAtras/img/e.png";
+        for (var obj in story.state.objectImages) {
+            story.state.objectImages[obj].setAttribute("id", "object_" + obj);
+            story.state.objectImages[obj].setAttribute("width", "32px");
+            story.state.objectImages[obj].setAttribute("height", "32px");
+        };
+        
+        story.state.clockImage = new Image();
+        story.state.clockImage.src = "http://www.luisquin.es/lq/laCuentaAtras/img/hourglass.gif";
+        
+        story.state.clocks = [];
+        story.state.numClocks = 15;
+        
+        for (q=story.state.numClocks; q--;) {
+            var clk = new Image();
+            clk.src = "http://www.luisquin.es/lq/laCuentaAtras/img/hourglass-icon.png";
+            story.state.clocks.push(clk);
+        }
+        
+        story.state.alreadyVisited = [];
+        for (var q=story.passages.length-1; q--;) {
+            story.state.alreadyVisited[q] = false;
+        }
+        console.log(story.state.alreadyVisited);
+        
+        $("#info-panel").children().each(function(i) {
+            $(this).remove();
+        });
+        for (q=story.state.numClocks; q--;) {
+            $("#info-panel").append(story.state.clocks[q]);
+        }
+        $("#info-panel").children().each(function(i) {
+            $(this).attr("id", "clockIcon"+i);
+            $(this).attr("width", "32px");
+            $(this).attr("height", "32px");
+        });
+        $("#info-panel").append("<div id='info-panel-title'>Tiempo</div>");
+        
+        story.state.habilities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        $("#habilities-panel").children().each(function(i) {
+            $(this).remove();
+        });
+        $("#habilities-panel").append("<div id='habilities-panel-title'>Habilidad (#)</div>");
+        for (q=0; q<story.state.habilities.length; q++) {
+            $("#habilities-panel").append("<span class='numberBtn noHover' id='habPanel_" + story.state.habilities[q] + "'>"+story.state.habilities[q]+"</span>");
+        }
+        $("#habilities-panel").append("<span id='lives'></span>");
+        $("#habilities-panel").append("<div id='habilities-panel-title2'>Vidas</div>");
+        story.state.lives = [];
+        story.state.numLives = 5;
+        for (q=story.state.numLives; q--;) {
+            var heart = new Image();
+            heart.src = "http://www.luisquin.es/lq/laCuentaAtras/img/heart-icon.png";
+            story.state.lives.push(heart);
+        }
+        $("#lives").children().each(function(i) {
+            $(this).remove();
+        });
+        for (q=story.state.numLives; q--;) {
+            $("#lives").append(story.state.lives[q]);
+        }
+        $("#lives").children().each(function(i) {
+            $(this).attr("id", "life_"+i);
+            $(this).attr("width", "32px");
+            $(this).attr("height", "32px");
+        });
+    },
+    
+    checkExits: function() {
+        $("#passage a").each(function(index) {
+            var exit = $(this).attr("data-passage");
+            if (!exit) return;
+            console.log("checking exits for", exit);
+            if (exit === "X") {
+                $(this).removeAttr("data-passage");
+                $(this).attr("href", "javascript:document.luisquin.solveMistery("+passage.name+")");
+            } else if (exit === "#") {
+                $(this).removeAttr("data-passage");
+                $(this).attr("href", "javascript:document.luisquin.launchHabilitySelection("+passage.name+")");
+            } else if (exit === "f" || exit === "s" || exit === "e") {
+                $(this).removeAttr("data-passage");
+                $(this).attr("id", "lab_potion_" + exit);
+                $(this).attr("href", "javascript:document.luisquin.takeLabPotion('"+exit+"')");
+            } else if (exit.indexOf("dont") > -1) {
+                $(this).attr("data-passage", exit.split("dont")[1]);
+                var cable = story.state.cablesOrdered.shift();
+                $(this).text("No cortes el cable " + cable.name + ".");
+                story.state.alreadyVisited[cable.target] = true;
+            } else if (exit.indexOf("cable_cut") > -1) {
+                var cable = story.state.cables[index];
+                $(this).attr("data-passage", cable.target);
+                $(this).text(cable.name);
+                exit = Number(cable.target);
+            } else {
+                exit = Number(exit);
+            }
+            if (story.state.alreadyVisited[exit] && !document.luisquin.passageHasTag(exit, "multi")) {
+                $(this).addClass("closed-exit");
+                $(this).removeAttr("data-passage");
+                console.error(exit, " parece haber sido visitada con anterioridad.");
+            }
+        });
+    },
+    
+    checkIfTimePasses: function() {
+        if (document.luisquin.passageHasTag(passage.name, "clock")) {
+            $("#event-window").append("<div id='clock'></div>");
+            $("#clock").append(story.state.clockImage);
+            $("#event-window").fadeIn(750).delay(2000).fadeOut(750, function() {
+                $("#clock").remove();
+                document.luisquin.decrementClock();
+            });
+        }
+    },
+    
+    createLetterOptions: function(letterExcluded) {
+        var NUM_OPTIONS = 4;
+        var allLetters = story.state.vowels.concat(story.state.consonants);
+        allLetters = document.luisquin.removeLetterFromArray(letterExcluded, allLetters);
+        var whereToAddCorrectLetter = Math.floor(Math.random() * NUM_OPTIONS);
+        var letterOptions = [];
+        for (var q=NUM_OPTIONS; q--;) {
+            if (q === whereToAddCorrectLetter) letterOptions.push(letterExcluded);
+            var letter = allLetters[Math.floor(Math.random() * allLetters.length)];
+            allLetters = document.luisquin.removeLetterFromArray(letter, allLetters);
+            letterOptions.push(letter);
+        }
+        return letterOptions;
+    },
+    
+    decrementClock: function() {
+        story.state.numClocks--;
+        if (story.state.numClocks < 0) {
+            story.show(70); // ending by time run out
+        } else {
+            $("#clockIcon"+story.state.numClocks).fadeOut(1500, function() {
+                $(this).remove();
+            });
+        }
+    },
+    
+    decrementLives: function(dmg) {
+        dmg = Number(dmg);
+        story.state.numLives -= dmg;
+        var count = 0;
+        while (dmg > 0) {
+            console.log(">", dmg);
+            $("#lives>img:eq("+count+")").delay(count*1000).fadeOut(1000, function() {
+                $(this).remove();
+                if ($("#lives").children().length === 0) {
+                    console.log("dead!");
+                    story.show(73); // ending by health damage
+                }
+            });
+            count++;
+            dmg--;
+        }
+    },
+    
+    drawMap: function() {
+        var currentPsg = Number(window.passage.id);
+        console.log("currentPSG: ", currentPsg);
+        if (currentPsg <= 2) return;
+        var $map = $("#map-panel");
+        if (currentPsg == 8) {
+            $map.append(story.state.map["down_floor"]).append("<br />").append(story.state.map["up_floor"]).addClass("map-collapsed");
+            $("#map-panel").unbind("click");
+            $("#map-panel").click(function(ev) {
+                if ($map.hasClass("map-collapsed")) {
+                    $map.removeClass("map-collapsed");
+                } else {
+                    $map.addClass("map-collapsed");
+                }
+            });
+            return;
+        }
+        
+        var whichPassage = Number(passage.name);
+        if (whichPassage && story.state.heroCoords[whichPassage]) story.state.lastMap = whichPassage;
+        var currMap = story.state.heroCoords[story.state.lastMap].map;
+        var oppMap = currMap === "up" ? "down" : "up";
+        
+        console.log("hiding:", $("#"+oppMap+"_map"));
+        $("#"+oppMap+"_map").hide(750, function() {
+            console.log("hiding complete!");
+            $("#"+oppMap+"_map").remove();
+            $("#map-panel>br").remove();
+            $map.append(story.state.map[currMap + "_floor"]).append(story.state.hero).addClass("map-collapsed");
+            $(".map-image").show(750);
+        });
+    },
+    
+    dropObject: function(obj, pause) {
+        if (!pause || isNaN(pause)) pause = 0;
+        story.state.objects = story.state.objects.replace(obj, "");
+        $("#object_"+obj).delay(pause).fadeOut(1500, function() {
+            $(this).remove();
+        });
+    },
+    
+    isVowel: function(letter) {
+        for (var q=story.state.vowels.length; q--;) {
+            if (story.state.vowels[q] === letter) {
+                return true;
+            }
+        }
+        return false;
+    },
+    
+    launchHabilitySelection: function(psgName) {
+        var s = story.state;
+        $("#event-window").append("<div id='hability-selection'></div>").css("opacity", 0.9);
+        for (var q=0; q<story.state.habilities.length; q++) {
+            $("#hability-selection").append("<button class='numberBtn' id='hab_" + story.state.habilities[q] + "'>"+story.state.habilities[q]+"</button>");
+            $("#hab_" + story.state.habilities[q]).bind("click", {index: story.state.habilities[q]}, function(ev, data) {
+                document.luisquin.useHability(ev.data.index);
+            });
+        }
+        $("#hability-selection").append("<button class='numberBtn' id='close-hability-selection'>X</div>");
+        $("#close-hability-selection").bind("click", function(ev, data) {
+            $("#event-window").fadeOut(750, function() {
+                $("#event-window").css("opacity", 0.75);
+                $("#hability-selection").remove();
+            });
+        });
+        $("#event-window").fadeIn(750);
+    },
+    
+    moveHero: function() {
+        var coords = story.state.heroCoords[window.passage.name] || null;
+        var $map = $("#map-panel");
+        if (coords) {
+            $map.children().each(function(i) {
+                if ($(this).attr("id") === "hero") {
+                    console.log("removing...", $(this));
+                    $(this).remove();
+                }
+            });
+            $map.append(story.state.hero);
+            $("#hero").animate({
+                left:   coords.x+"px",
+                top:    coords.y+"px"
+            }, 
+            1500, 
+            function() {
+                // Animation complete.
+                console.log("hero animation complete!");
+            });
+        } else {
+            console.log("not moving hero");
+        }
+    },
+    
+    onLetterClicked: function(letter) {
+        letter = letter.toLowerCase();
+        console.log("letter:", letter);
+        $("#solution-text").text($("#solution-text").text() + letter);
+        console.log(letter, story.state.letterCodes[letter]);
+        $("#solution-number").text(parseInt($("#solution-number").text()) - story.state.letterCodes[letter]);
+
+        if (++story.state.currentPos > story.state.solution.length-1) {
+            console.log("should end!");
+            $(".letterBtn").remove();
+            if ($("#solution-text").text() === story.state.solution) {
+                console.log("Hemos acertado!!!");
+                $("#event-window").fadeOut(750, function() {
+                    $("#event-window").css("opacity", 0.75);
+                    $("#hability-selection").remove();
+                    $("#solution-panel").remove();
+                    document.luisquin.removePassageTags(story.state.toRemove);
+                    story.show(Number(story.state.success)+1);
+                });
+            }
+            return;
+        }
+        var letterOptions = document.luisquin.createLetterOptions(story.state.solution.charAt(story.state.currentPos));
+        $(".letterBtn").remove();
+        for (var w=0; w<letterOptions.length; w++) {
+            $("#hability-selection").prepend("<button class='numberBtn letterBtn' id='letter_" + letterOptions[w] + "'>" + letterOptions[w] + "</button>");
+            $("#letter_" + letterOptions[w]).unbind("click").bind("click", {letter: letterOptions[w]}, function(ev, data) {
+                console.log("clicked " + ev.data.letter);
+                document.luisquin.onLetterClicked(ev.data.letter);
+            });
+        }
+    },
+    
+    passageHasTag: function(psgName, tag) {
+        var psgNumber = Number(psgName) + 1;
+        if (isNaN(psgNumber)) return false;
+        var psg = story.passages[psgNumber];
+        for (var q=psg.tags.length; q--;) {
+            if (psg.tags[q] === tag) return true;
+        }
+        return false;
+    },
+    
+    recoverHability: function() {
+        for (var q = 0; q<10; q++) {
+            console.log("comprobando", q, story.state.habilities[q])
+            if (story.state.habilities[q] !== q+1) {
+                console.log("no es igual a", q+1);
+                story.state.habilities.splice(q, 0, q+1);
+                $("#habilities-panel").append("<span class='numberBtn noHover' id='habPanel_" + (q+1) + "'>"+(q+1)+"</span>");
+                $("#habPanel_"+(q+1)).hide().fadeIn(1500);
+                break;
+            }
+        }
+    },
+    
+    removeHability: function(habNumber) {
+        for (var q = 0; q < story.state.habilities.length; q++) {
+            if (story.state.habilities[q] === habNumber) {
+                story.state.habilities.splice(q, 1);
+                break;
+            }
+        }
+    },
+    
+    removeLetterFromArray: function(letter, arr) {
+        for (var q=arr.length; q--;) {
+            if (arr[q] === letter) {
+                arr.splice(q, 1);
+                break;
+            }
+        }
+        return arr;
+    },
+    
+    removePassageTags: function(psgName) {
+        var psgNumber = Number(psgName) + 1;
+        if (isNaN(psgNumber)) return;
+        var psg = story.passages[psgNumber];
+        psg.tags = [];
+    },
+    
+    resetGame: function() {
+        console.log("reset game");
+        $("#map-panel").children().each(function(i) {
+            $(this).remove();
+        });
+        document.luisquin.init();
+        setTimeout(function() {
+            story.show(1);
+        }, 750);
+    },
+    
+    shuffleArray: function(input) {
+        for (var i = input.length-1; i >=0; i--) {
+            var randomIndex = Math.floor(Math.random()*(i+1)); 
+            var itemAtIndex = input[randomIndex]; 
+
+            input[randomIndex] = input[i]; 
+            input[i] = itemAtIndex;
+        }
+        return input;
+    },
+    
+    solveMistery: function(psgName) {
+        var s = story.state;
+        /*
+        var answer = prompt("¿Cuál es la respuesta? " + s.solution + " " + s.success + " " + s.failure);
+        if (String(answer).toLocaleLowerCase() === s.solution) {
+            document.luisquin.removePassageTags(s.toRemove);
+            story.show(Number(s.success)+1);
+        } else {
+            story.show(Number(s.failure)+1);
+        }
+        */
+        story.state.currentPos = 0;
+        $("#event-window").append("<div id='hability-selection'></div>").css("opacity", 0.9);
+        var letterOptions = document.luisquin.createLetterOptions(s.solution.charAt(story.state.currentPos));
+        for (var w=0; w<letterOptions.length; w++) {
+            $("#hability-selection").append("<button class='numberBtn letterBtn' id='letter_" + letterOptions[w] + "'>" + letterOptions[w] + "</button>");
+            $("#letter_" + letterOptions[w]).unbind("click").bind("click", {letter: letterOptions[w]}, function(ev, data) {
+                console.log("clicked " + ev.data.letter);
+                document.luisquin.onLetterClicked(ev.data.letter);
+            });
+        }
+        $("#event-window").append("<div id='solution-panel'><span id='solution-text'></span>&nbsp;<span id='solution-number'>" + document.luisquin.sumLetters(s.solution) + "</span></div>");
+        $("#hability-selection").append("<button class='numberBtn' id='close-hability-selection'>X</div>");
+        $("#close-hability-selection").bind("click", function(ev, data) {
+            $("#event-window").fadeOut(750, function() {
+                $("#event-window").css("opacity", 0.75);
+                $("#hability-selection").remove();
+                $("#solution-panel").remove();
+                story.show(Number(s.failure)+1);
+            });
+        });
+        $("#event-window").fadeIn(750);
+    },
+    
+    sumLetters: function(text) {
+        var sum = 0;
+        for (var q=text.length; q--;) {
+            sum += story.state.letterCodes[text[q]];
+        }
+        return sum;
+    },
+    
+    takeLabPotion: function(potion) {
+        $("#lab_potion_"+potion).removeAttr("href").addClass("closed-exit");
+        document.luisquin.takeObject(potion);
+        if (++story.state.numPotions == 2) {
+            story.show(Number(story.state.habilityTarget+1));
+        }
+    },
+    
+    takeObject: function(obj, pause) {
+        $("#info-panel").append(story.state.objectImages[obj]);
+        if (!pause || isNaN(pause)) pause = 0;
+        story.state.objects += obj;
+        $("#object_"+obj).hide().delay(pause).fadeIn(1500);
+    },
+    
+    useHability: function(habNumber) {
+        document.luisquin.removeHability(habNumber);
+        $("#habPanel_" + habNumber + ", #hab_" + habNumber).fadeOut(750, function() {
+            $(this).remove();
+        });
+        story.state.habilityInUse = habNumber;
+        $("#event-window").delay(750).fadeOut(750, function() {
+            $("#event-window").css("opacity", 0.75);
+            $("#hability-selection").remove();
+            $("#solution-panel").remove();
+            console.log("going to ", story.state.habilityTarget+1);
+            story.show(Number(story.state.habilityTarget+1));
+        });
+    }
+};
+
+</script><tw-passagedata pid="1" name="Introducción" tags="" position="52,50">
+
+Lunes, siete de la mañana. Suena el teléfono. Alargas la  mano hacia la mesilla de tu cama, somnoliento pero invadido de un mal presentimiento. Sí, es su número; es él otra  vez. Tu adversario, tu némesis. Cuelgas al instante: sabes  qué quiere. Jugar de nuevo.
+
+Perteneces a la brigada de artificieros y eres bueno en  tu trabajo. Tanto, que ese malnacido se fijó en ti desde el principio y te eligió como digno oponente en sus desmanes. Ignoras si se trata de un psicópata o de un fanático pasado  de rosca de los thrillers americanos; fabrica explosivos,  los coloca, los esconde... y, salvo que tú lo evites, estallan. 
+
+“Rocko”, como él mismo se denomina, impone siempre  sus normas: avisa de la colocación de las bombas con la  condición de que solo tú, sin ayuda, te enfrentes al reto.  Lo que suele implicar, aparte de un riesgo para tu vida,  tener que resolver acertijos llenos de retorcidos juegos de  palabras. Le chiflan.  Ha demostrado que juega limpio si se observan sus  premisas. Cuando no, como la policía hubo de lamentar en  una ocasión, toma represalias y se produce el desastre. No debe ocurrir de nuevo.  
+
+Por el chat del móvil, ese que siempre usa para interactuar en sus desafíos, te informa de que el explosivo se  encuentra en un instituto, justo en el que tú estudiaste. Si  obras con acierto, tienes el tiempo justo para encontrar e  inutilizar su bomba. Si no...  
+
+Te levantas, te vistes y coges tu maletín. Contactas con  la policía para que hagan las llamadas oportunas y eviten  que el personal, familias y alumnos vayan al centro. 
+
+Sobre  todo, que no intervengan. Rocko solo te quiere a TI.
+¿Serás capaz de ganarle la partida esta vez? 
+
+[[Compruébalo.-&gt;1]]</tw-passagedata>
+<tw-passagedata pid="2" name="1" tags="" position="200,50">Llegas con tu coche al instituto, con el corazón latiéndote con fuerza.
+
+La directora te espera en la puerta; te dice que el centro está vacío y te entrega un plano del  edificio. Te da también un manojo de llaves indicándote lo que abre cada una.
+
+Con  el rostro asustado y mirada suplicante te desea suerte. Le diriges una sonrisa: la vas  a necesitar. Sabes que siempre que Rocko elige un escenario se hace dueño de él horas antes. Estás a su merced.
+
+[[Pero le has vencido otras veces y lo harás de nuevo.-&gt;7]]  </tw-passagedata>
+<tw-passagedata pid="3" name="2" tags="multi" position="350,50">Sacas el radiocasete de su jaula de cristal y lo enchufas a la red.
+
+Expectante,  aunque irritado por los jueguecitos de tu némesis, le das al play. 
+
+Un voz distorsionada surge de los altavoces: “INGLÉS. El mañana se construye con voluntad”. 
+
+¿Sabes  la palabra? 
+&lt;%
+var s = story.state;
+s.solution = &quot;will&quot;;
+s.success = 29;
+s.failure = 8;
+s.toRemove = 31;
+%&gt;
+[[Si es así...-&gt;X]] [[Si no...-&gt;8]] 
+
+[[¿Necesitas una pista?-&gt;61]]  </tw-passagedata>
+<tw-passagedata pid="4" name="3" tags="clock" position="500,51">Las estanterías desmontables de metal, los murales y las cajas de herramientas no dejan lugar a dudas sobre el lugar donde te encuentras: el taller de tecnología. 
+
+En las sufridas y melladas mesas de trabajo aún hay restos de cartulina, hojalata,  marquetería y piezas de incierta naturaleza. 
+
+Rastreas a conciencia la estancia pero  no parece haber nada relacionado con los explosivos que buscas. Lo que sí encuentras, entre varios cedés destinados a posavasos, es... ¡una cinta de casete con tu nombre en mayúsculas! 
+
+Esto es cosa de Rocko: decides cogerla. 
+&lt;%
+	document.luisquin.takeObject(&quot;t&quot;, 2000);
+%&gt;
+[[Luego sal.-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="5" name="4" tags="" position="650,50"> [[Extraes las tijeras de tu maletín y cortas el cable.-&gt;60]]  </tw-passagedata>
+<tw-passagedata pid="6" name="5" tags="multi clock" position="800,48">&lt;%if (!s.alreadyVisited[passage.name]) { %&gt;
+Entras en 3ºB, presto a un sumario registro; pero este no revela nada en particular. Sin embargo, te percatas de que el  techo alberga un proyector... y está en funcionamiento. 
+
+Por impulso, te acercas a la  mesa del profesor y mueves el ratón: la pantalla se ilumina. En ella aparece este  mensaje: “Para leer el acertijo, pulsa enter”. Algo que no supondría dificultad alguna  de no ser porque “alguien” ha quitado el teclado del ordenador. 
+
+&lt;% 
+	if (story.state.objects.indexOf(&quot;p&quot;) &gt;= 0) {
+%&gt;
+[[Por suerte, dispones de un lápiz óptico.-&gt;58]] 
+&lt;%
+	} else {
+%&gt;
+[[No hay nada que puedas hacer.-&gt;12]]  
+&lt;%
+	}
+} else if (story.state.objects.indexOf(&quot;p&quot;) &gt;= 0) {
+%&gt;
+Te acercas a la  mesa del profesor y mueves el ratón: la pantalla se ilumina. En ella aparece este  mensaje: “Para leer el acertijo, pulsa enter”.
+
+[[Con el lápiz óptico puedes interactuar con el ordenador aunque no haya teclado..-&gt;58]]
+&lt;%
+} else {
+%&gt;
+Te acercas a la  mesa del profesor y mueves el ratón: la pantalla se ilumina. En ella aparece este  mensaje: “Para leer el acertijo, pulsa enter”.
+Algo que no supondría dificultad alguna  de no ser porque “alguien” ha quitado el teclado del ordenador.
+
+[[No hay nada que puedas hacer.-&gt;12]]
+&lt;%
+}
+%&gt;
+
+</tw-passagedata>
+<tw-passagedata pid="7" name="6" tags="" position="950,50">En su caída, los libros han arrastrado un papelito que aterriza plácidamente en  el suelo. Te agachas para recogerlo y lees: “La contraseña es TNT”. 
+
+Un cachondo,  este tipo. Y un bastardo de primera. 
+
+[[Apunta C.-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="8" name="7" tags="" position="1100,50">El edificio solo presenta dos alturas. 
+
+Según el plano, abajo se encuentran el  recreo y el polideportivo, secretaría, dos salas de tutoría, el taller de tecnología y  las clases de ESO. 
+
+En el piso superior se hallan las aulas de Bachillerato más dos de  desdobles, la sala de profesores, la biblioteca, el aula de informática, la de idiomas  y el laboratorio. 
+
+Hay servicios en ambas plantas. 
+
+Cuando te estás planteando por  dónde empezar, un mensaje brota en tu móvil: “Para que veas que soy generoso, te  diré que la bomba no está ni en el recreo ni el polideportivo”. Todo un altruista,  este Rocko. 
+
+[[Si empiezas por abajo...-&gt;12]] [[Si vas arriba...-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="9" name="8" tags="multi" position="50,200">Estás en el pasillo de la planta superior. 
+
+Puedes investigar las clases de 1º de  Bachiller ([[grupo G-&gt;36]], [[grupo H-&gt;11]]), 2º de Bachiller ([[grupo G-&gt;39]], [[grupo H-&gt;9]]), las de [[desdobles-&gt;41]], la [[sala de  profesores-&gt;25]]), la de [[informática-&gt;28]], los [[servicios-&gt;15]], el [[laboratorio-&gt;47]], el [[aula de idiomas-&gt;31]] o la [[biblioteca-&gt;33]]. 
+O puedes bajar a la [[planta inferior-&gt;12]].  </tw-passagedata>
+<tw-passagedata pid="10" name="9" tags="multi clock" position="200,200">&lt;%
+if (!s.doorDown) {
+	s.habilityTarget = 18;
+%&gt;
+La puerta de 2ºH está cerrada y tiene  pegamento en la cerradura. Si pretendes entrar, [[tendrás que echar la puerta abajo.-&gt;#]]
+&lt;% } else { %&gt;
+La puerta de 2ºH está destrozada. [[Puedes entrar.-&gt;14]]
+&lt;% } %&gt;
+[[Si te vas...-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="11" name="10" tags="clock" position="350,200">En 3ºA no te topas con ninguna bomba, aunque el “mensajito” que encuentras tiene sobre ti un efecto igualmente devastador. 
+
+Por lo visto, los alumnos de la  clase han debido de asistir recientemente a una lección sobre células y sus orgánulos, porque varios murales de gran tamaño cubren las corcheras. En uno de ellos,  surcando el citoplasma entre ribosomas y mitocondrias, Rocko ha puesto un letrerito mecanografiado:
+“¿Aprobarás mi examen, o tendré que suspenderte?”. 
+
+
+[[Genial.-&gt;12]]</tw-passagedata>
+<tw-passagedata pid="12" name="11" tags="clock" position="500,200">Entras en 1ºH. 
+
+Rastreas la habitación cubriendo todos los ángulos y atento  al más mínimo detalle; sin embargo, nada puede hallarse donde nada hay. 
+
+Frustrado,  [[sales de la clase.-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="13" name="12" tags="multi" position="651,199">Estás en el pasillo de la planta baja. 
+
+Decide si quieres explorar las clases de  1º ESO ([[grupo A-&gt;17]], [[grupo B-&gt;38]]), 2º ESO ([[grupo A-&gt;52]], [[grupo B-&gt;56]]), 3º ESO ([[grupo A-&gt;10]], [[grupo B-&gt;5]]) o las de 4º ESO ([[grupo A-&gt;43]], [[grupo B-&gt;40]]). 
+También dispones de la [[sala de tecnología-&gt;3]], las [[salas de tutoría-&gt;54]],  [[secretaría-&gt;59]] y los [[servicios-&gt;22]]. 
+
+O puedes subir a la [[planta superior-&gt;8]].</tw-passagedata>
+<tw-passagedata pid="14" name="13" tags="multi" position="800,200">&lt;% 
+if (story.state.objects.indexOf(&quot;z&quot;) &lt; 0) {
+	document.luisquin.takeObject(&quot;z&quot;, 2000);
+%&gt;
+De repente, asientes. Vuelves a entrar en uno de  los reservados y te agachas junto al retrete; la llave de paso del agua está cerrada. Y  se te ocurre un posible motivo. 
+
+Sigues tu corazonada y tratas de levantar la tapa de  la cisterna. Parece haber sido asegurada de algún modo, porque ofrece resistencia.  
+
+Haciendo acopio de fuerzas y usando un par de utensilios de tu maletín consigues  al fin alzarla.
+
+Eureka: aquí está la bomba; con un temporizador que muestra que **te  queda poco tiempo**. 
+La carga explosiva exhibe seis cables cuya única distinción son  unas etiquetas con ternas de letras griegas. 
+Conoces el modus operandi de Rocko y  sus reglas: lo único permitido es cortar el cable adecuado. Cualquier otra acción la  hará explotar o traerá funestas consecuencias. 
+
+[[Si pruebas a cortar uno...-&gt;24]] [[Si  necesitas explorar mejor el instituto...-&gt;12]]  
+&lt;% } else { %&gt;
+Contemplas la bomba: su temporizador te informa de que el tiempo se te acaba. Es ahora o nunca. 
+
+[[Pruebas a cortar un cable...-&gt;24]]
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="15" name="14" tags="multi" position="950,200">&lt;%
+var s = story.state;
+s.solution = &quot;comuneros&quot;;
+s.success = 55;
+s.failure = 8;
+s.toRemove = 9;
+%&gt;
+
+Escudriñas cada porción del aula, fluorescentes incluidos. 
+
+Ni rastro de la  bomba, pero hay un mensaje escrito a rotulador en una mesa. Su autor no ha podido  ser un alumno: se trata de Rocko. 
+
+El acertijo reza: “HISTORIA. Hippies castellanos  un tanto revoltosos”. 
+
+[[Si sabes la solución...-&gt;X]] [[Si no...-&gt;8]] 
+
+[[¿Necesitas una pista?-&gt;23]]</tw-passagedata>
+<tw-passagedata pid="16" name="15" tags="clock" position="1100,200">Revisas meticulosamente los servicios de la planta superior, en vano. 
+
+No encuentras nada relevante, a menos que consideres como tal la frase que tu singular  adversario ha escrito bajo la tapa de uno de los retretes de los servicios femeninos:  “¿Entrando en el baño de las chicas, a tu edad? Vaya pervertido...” 
+
+Sí, ciertamente se  te están ocurriendo varias perversiones [[para cuando pillen a este desgraciado.-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="17" name="16" tags="clock" position="50,350"> [[¿Qué instrumento tocaba Orfeo?-&gt;49]]  </tw-passagedata>
+<tw-passagedata pid="18" name="17" tags="clock" position="200,350">Abres la puerta de 1ºA, que estaba cerrada con llave, y revisas con minuciosidad el aula: pupitres, corcheras, armarios, estanterías, la mesa del profesor,  perchas... [[mas no hallas nada raro.-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="19" name="18" tags="multi" position="350,350">&lt;%
+if (s.habilityInUse &gt;= 8) {
+	s.doorDown = true;
+%&gt;
+[[La puerta se desploma y accedes a la sala.-&gt;14]]  
+&lt;% } else if (s.habilityInUse &gt;= 6) { %&gt;
+Fracasas en el empeño.
+[[Inténtalo de nuevo-&gt;#]] o [[desiste.-&gt;8]]
+&lt;% } else { 
+s.habilityTarget = 73;
+%&gt;
+Fracasas en el empeño y además te haces daño: [[quítate un # de Salud.-&gt;#]]
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="20" name="19" tags="" position="500,350">&lt;%
+if (s.habilityInUse &lt; 4) {
+%&gt;
+[[No oyes nada.-&gt;12]] 
+&lt;% } else { %&gt;
+Tu fino oído detecta un siniestro tic-tac apagado que parece provenir del hueco que deja la papelera con el rincón. 
+
+La apartas con  cuidado, preparado ya para destrabar tu maletín... y te topas con un simple e inocuo reloj antiguo, que te obsequia con su reflejo de metal.
+
+[[Rocko se está riendo de ti.-&gt;12]]
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="21" name="20" tags="" position="650,350"> &lt;%
+ if (s.habilityInUse &gt; 8) {
+ %&gt;
+[[Algo te ronda por la cabeza, un detalle que no te cuadra.-&gt;13]]
+&lt;% } else { %&gt;
+[[No hallas nada especial.-&gt;12]]  
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="22" name="21" tags="" position="800,350">Introduces la respuesta al acertijo de Lengua en tu móvil y Rocko contesta:  
+“Afirmativo. [[No cortes el cable”.-&gt;dont12]]</tw-passagedata>
+<tw-passagedata pid="23" name="22" tags="multi clock" position="950,350">
+&lt;% 
+s.habilityTarget = 20;
+if (story.state.objects.indexOf(&quot;z&quot;) &gt;= 0) {
+%&gt;
+[[Regresas a los servicios, con la adrenalina a flor de piel.-&gt;13]]
+&lt;% } else if (!s.alreadyVisited[passage.name]) { %&gt;
+Entras en los servicios de la planta baja sin grandes expectativas. 
+
+Comienzas  a palpar, examinar, rebuscar por lavabos, espejos y retretes sin novedad. 
+¿Quizá en  el secador automático? No, tampoco. 
+
+Sin embargo, te asalta la sensación de que has  pasado algo por alto, no sabrías decir si producto del instinto o la frustración.
+
+[[Si  deseas usar un #...-&gt;#]] [[Si no...-&gt;12]]
+&lt;% } else { %&gt;
+Vuelves a los servicios, confiando en encontrar algo esta vez.
+
+[[Si  deseas usar un #...-&gt;#]] [[Si no...-&gt;12]]
+&lt;% } %&gt;
+</tw-passagedata>
+<tw-passagedata pid="24" name="23" tags="clock" position="1100,350"> [[Los hippies vivían en comunas.-&gt;14]]  </tw-passagedata>
+<tw-passagedata pid="25" name="24" tags="" position="49,501">Tu adrenalina se dispara. 
+
+¿Cuál vas a cortar? El [[ΣΚΠ-&gt;cable_cut]], el [[ΨΣΛ-&gt;cable_cut]], el [[ΚΡΛ-&gt;cable_cut]], el [[ΦΩΨ-&gt;cable_cut]], el [[ΔΠΣ-&gt;cable_cut]], el [[ΨΛΩ-&gt;cable_cut]] o el [[ΦΔΩ-&gt;cable_cut]].  </tw-passagedata>
+<tw-passagedata pid="26" name="25" tags="multi clock" position="200,500">&lt;%
+if (s.alreadyVisited[passage.name]) {
+if (s.lockDestroyed) {
+%&gt;
+Habías encontrado un cajón con un candado que has forzado con ácido sulfúrico.
+[[Ábrelo.-&gt;51]]
+&lt;% 	} else { %&gt;
+Hay un cajón al que se ha acoplado un candado para impedir su apertura.
+Por mucho que pruebas, ninguna de las llaves que  te dio la directora puede abrirlo. 
+&lt;%	if (s.objects.indexOf(&quot;s&quot;) &gt;= 0) { %&gt;
+[[Dispones del ácido sulfúrico.-&gt;51]]
+&lt;% 	} else { %&gt;
+[[No se te ocurre qué hacer.-&gt;8]]
+&lt;% 	}
+}
+} else { %&gt;
+Penetras en el sanctasanctórum de los profesores: carpetas, libros de texto, grapadoras, folios y bolígrafos rojos salpican como matojos una gran mesa rectangular. 
+
+Apenas hay espacio libre en las  paredes, conquistadas por un continuo de estanterías y corcheras. 
+
+Inspeccionas  cada centímetro, sin éxito, hasta encontrar un cajón al que se ha acoplado un candado para impedir su apertura.
+Por mucho que pruebas, ninguna de las llaves que  te dio la directora puede abrirlo. 
+
+&lt;%	if (s.objects.indexOf(&quot;s&quot;) &gt;= 0) { %&gt;
+[[Dispones del ácido sulfúrico.-&gt;51]]
+&lt;% 	} else { %&gt;
+[[No se te ocurre qué hacer.-&gt;8]]
+&lt;% 	} 
+} 
+%&gt;</tw-passagedata>
+<tw-passagedata pid="27" name="26" tags="" position="350,500">Examinas cada rincón, cada recoveco, pero pronto llegas a la conclusión de  que no ha merecido la pena exponerte a la trampa de Rocko: [[no hallas nada.-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="28" name="27" tags="" position="500,500">&lt;%
+if (s.habilityInUse &lt; 6) {
+%&gt;
+[[Tu instinto no te dice nada.-&gt;8]]
+&lt;% } else { %&gt;
+Un sexto sentido te dice que ese libro que sobresale en el tercer estante, en la pared izquierda, no destaca entre sus iguales por azar. 
+
+[[Si deseas sacarlo...-&gt;63]] [[Si prefieres no tocarlo...-&gt;8]] 
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="29" name="28" tags="multi clock" position="650,500">Ante ti se expande una  sala con un pasillo central y varias hileras de ordenadores a cada lado. Una pantalla  móvil está descolgada enfrente de ellos pero no atisbas aparato alguno con el que  proyectar. 
+
+Inspeccionas el mobiliario, las cortinas, los equipos... y descubres uno  en marcha. Te acercas. El monitor pide una contraseña. 
+
+&lt;%
+if (s.objects.indexOf(&quot;c&quot;) &gt;= 0) {
+%&gt;
+[[La sabes.-&gt;34]] 
+&lt;% } else { %&gt;
+[[No tienes tiempo para juegos.-&gt;8]]  
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="30" name="29" tags="" position="800,500">Escribes la respuesta al acertijo de Inglés en tu chat del móvil y de inmediato Rocko contesta: “Correcto. [[No cortes el cable ΔΠΣ”.-&gt;dont8]]</tw-passagedata>
+<tw-passagedata pid="31" name="30" tags="" position="950,500">No hay nada nuevo en este lugar. 
+
+[[Ve al 12 si estás abajo-&gt;12]] y [[al 8 si estás arriba.-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="32" name="31" tags="multi clock" position="1101,500">Entras en la clase, que consta de diez filas de mesas alargadas transversales con taburetes. Cada una dispone de focos individuales y entradas de auriculares para los alumnos.
+
+Localizas en las paredes laterales dos altavoces y varios equipos de sonido junto al puesto del profesor. 
+En una vitrina, a modo de recuerdo nostálgico, divisas un viejo radiocasete. 
+
+&lt;%
+if (s.objects.indexOf(&quot;t&quot;) &gt;= 0) { %&gt;
+[[Y tienes una cinta de casete...-&gt;2]] 
+&lt;% } else { %&gt;
+[[No hay nada que hacer aquí.-&gt;8]]
+&lt;% }%&gt;</tw-passagedata>
+<tw-passagedata pid="33" name="32" tags="" position="50,650">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/victoria.png&quot; alt=&quot;¡Victoria!&quot; /&gt;
+
+Sacas las tijeras de tu maletín y cortas el cable. En apariencia no ocurre nada;  eso puede ser buena señal o muy mala. 
+
+Mas cuando miras al temporizador constatas  que se ha parado. 
+
+¡Has desactivado la bomba! La euforia inunda tu corazón. ¡Lo has  logrado, has vencido a Rocko en su terreno! Enhorabuena. 
+
+FIN.
+
+[[Volver a jugar.-&gt;END]]</tw-passagedata>
+<tw-passagedata pid="34" name="33" tags="multi clock" position="200,650">Al penetrar en la biblioteca, te  reciben varios bancos paralelos con fluorescentes adosados para leer y estudiar, circundados por varias estanterías con anaqueles repletos de libros. Hay también  varios ordenadores y un carrito con ruedas.
+
+Revisas todo mas no encuentras ningún indicio. Aunque... algo revolotea en tu mente. 
+&lt;%
+s.habilityTarget = 27;
+%&gt;
+[[Usa tu habilidad #-&gt;#]] o [[deja el lugar.-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="35" name="34" tags="multi" position="350,650">Metes la contraseña y se activa un programa con el siguiente acertijo:
+“FÍSICA. Fantasma electromagnético”. 
+&lt;%
+var s = story.state;
+s.solution = &quot;espectro&quot;;
+s.success = 48;
+s.failure = 8;
+s.toRemove = 28;
+%&gt;
+[[Si hallas la solución...-&gt;X]] [[Si no...-&gt;8]]
+[[¿Quieres una pista?-&gt;45]]</tw-passagedata>
+<tw-passagedata pid="36" name="35" tags="" position="500,651"> Sacas las tijeras de tu maletín y [[cortas el cable.-&gt;60]]  </tw-passagedata>
+<tw-passagedata pid="37" name="36" tags="clock" position="650,650">Penetras en la clase de primero de Bachillerato con un mal presentimiento; envuelto en sudor frío y con la adrenalina disparada, navegas entre pupitres, armarios y papeleras. 
+
+No obstante, es una falsa alarma. 
+Tu investigación resulta inútil  salvo por el hallazgo de un lápiz óptico que descubres en un cajón. 
+
+[[Puede ser útil, te lo llevas.-&gt;8]]
+
+&lt;%
+	document.luisquin.takeObject(&quot;p&quot;, 4000);
+%&gt;</tw-passagedata>
+<tw-passagedata pid="38" name="37" tags="" position="800,650">“La respuesta al acertijo de química es correcta”, anuncia la pizarra digital. 
+
+[[“No cortes el cable ΦΩΨ”.-&gt;dont12]]</tw-passagedata>
+<tw-passagedata pid="39" name="38" tags="clock" position="950,650">La puerta de 1ºB está abierta, así que tienes el camino libre para investigar.  
+
+Llama la atención lo limpio que está el suelo; si no hubiese una bomba de por medio, se volvería un estercolero de papeles en cuestión de horas. 
+Tu deber es procurar  que sigan teniendo un sitio donde dar rienda suelta a su adolescencia, uno que no  haya volado en pedazos. 
+
+Rebuscas por todos los lados pero no das con nada inquietante.
+
+Cuando vas a irte, adviertes que hay algo escrito en un rincón de la  pizarra: “En 3ºB o en 1ºA hallarás algo, pero [[solo en uno de ellos-&gt;12]]”.</tw-passagedata>
+<tw-passagedata pid="40" name="39" tags="clock" position="1100,650">La puerta de 2ºG está abierta, invitándote a entrar. 
+Resulta, no obstante,  una invitación estéril, pues [[tu exploración no te revela ninguna pista.-&gt;8]]  </tw-passagedata>
+<tw-passagedata pid="41" name="40" tags="clock" position="50,800">&lt;%
+s.habilityTarget = 57;
+%&gt;
+Guardas cierto cariño a 4ºB; fue uno de tus mejores años y en el que conociste a tu primera chica. 
+Poco tiene que ver esa felicidad pasada con la seriedad de  las actuales circunstancias, pero no puedes evitar esbozar una sonrisa cuando, durante tu inspección, pasas la mano por una muesca en la mesa que ocupabas, que  permanece tal cual la dejaste. 
+
+Por lo demás, zócalos, armarios y radiadores no albergan secreto alguno... ¿o deberías mirar mejor? 
+
+[[Si quieres usar un #...-&gt;#]] [[Si no...-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="42" name="41" tags="clock" position="200,800">Las dos aulas de desdobles se usan para dividir a los alumnos según las optativas asociadas al tipo de bachillerato elegido, o para ciertas asignaturas de ESO. 
+
+Realizas tu inspección en la primera clase sin novedad; la segunda, no obstante, te depara emociones. 
+Tras una concienzuda revisión por el mobiliario y lugares habituales tu mirada se congela al vislumbrar algo oscuro sobre uno de los fluorescentes.  
+
+Acercas una mesa y te subes sobre ella para alcanzar el objeto. ¿Habrás dado con  el explosivo? 
+Lo palpas: se trata de una cajita delgada de plástico negro y duro, con  broches ornamentales en el exterior. No emite ningún sonido. 
+La retiras con cuidado  y, una vez en el suelo, quitas la tapa con facilidad. Demasiada. 
+
+Dentro no hay más  que un papel con letra de imprenta que reza: “¿No pensarías encontrar la bomba  aquí, verdad?” 
+
+[[Bufas de irritación y te dispones a irte.-&gt;65]] </tw-passagedata>
+<tw-passagedata pid="43" name="42" tags="clock" position="350,800">[[La Tabla Periódica te será de gran ayuda.-&gt;58]]  </tw-passagedata>
+<tw-passagedata pid="44" name="43" tags="clock" position="500,800">&lt;%
+s.habilityTarget = 49;
+%&gt;
+La puerta de 4ºA está cerrada, así que echas mano de las llaves que te cedió  la directora. 
+
+Entras y realizas el correspondiente barrido en pos de cargas explosivas o, en su defecto, pistas sobre su ubicación, mas no percibes nada significativo.  
+¿O quizá sí? 
+
+[[Si deseas usar un #...-&gt;#]] [[Si no...-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="45" name="44" tags="" position="650,800">[[Extraes las tijeras de tu maletín y cortas el cable.-&gt;60]]  </tw-passagedata>
+<tw-passagedata pid="46" name="45" tags="clock" position="800,800">[[Hay un sinónimo de fantasma especialmente adecuado.-&gt;34]]  </tw-passagedata>
+<tw-passagedata pid="47" name="46" tags="" position="950,800">&lt;%
+if (s.habilityInUse &lt; 7) {
+%&gt;
+[[Tu habilidad no ha sido suficiente.-&gt;66]]
+&lt;% } else { %&gt; 
+Por fortuna, estás atento y te percatas de Rocko te ha puesto  una trampa en forma de caja apoyada sobre la parte superior de la puerta y la pared.  
+
+[[Te cuelas por el hueco sin tocar la madera y penetras en el aula.-&gt;26]]  
+&lt;% } %&gt; </tw-passagedata>
+<tw-passagedata pid="48" name="47" tags="multi clock" position="1100,800">&lt;%
+if (!s.alreadyVisited[passage.name]) {
+%&gt;
+Nada más entrar en el laboratorio, algunas imágenes de buenos momentos afluyen a tu memoria. Recuerdas que te encantaban los experimentos, en especial los de Química: todo un espectáculo mezclar dos disoluciones y contemplar un llamativo cambio de color. 
+Estás tan embobado en tu ensoñación que no reparas en  el charco de líquido incoloro bajo tus pies antes de resbalar y caer dolorosamente al suelo. 
+
+Contemplas la zona en la que has deslizado y reconoces en su estratégica posición la acción deliberada de quien ya sabes. 
+Te pones en  pie, irritado. 
+&lt;%
+s.habilityTarget = 74;
+%&gt;
+[[Quítate un # de Salud.-&gt;#]]
+&lt;% 
+} else {
+document.luisquin.dropObject(&quot;f&quot;);
+document.luisquin.dropObject(&quot;s&quot;);
+document.luisquin.dropObject(&quot;e&quot;);
+story.state.numPotions = 0;
+s.habilityTarget = 8;
+%&gt;
+Junto a un equipo de destilación, encuentras tres sustancias que pueden serte útiles: [[cloroformo-&gt;f]], [[ácido sulfúrico-&gt;s]] y [[alcohol etílico-&gt;e]]. **No  te atreves a llevar encima más de dos de ellos.**
+&lt;% 
+}
+%&gt;</tw-passagedata>
+<tw-passagedata pid="49" name="48" tags="" position="50,950">Tecleas la respuesta al acertijo de física y el ordenador te devuelve lo  siguiente: 
+“Cierto. [[No cortes el cable ΚΡΛ”.-&gt;dont8]]</tw-passagedata>
+<tw-passagedata pid="50" name="49" tags="multi" position="200,950">&lt;%
+if (s.habilityInUse &lt; 5) {
+%&gt;
+[[Tu escrutinio no da fruto.-&gt;12]] 
+&lt;% } else { 
+var s = story.state;
+s.solution = &quot;lira&quot;;
+s.success = 21;
+s.failure = 12;
+s.toRemove = 49;
+%&gt;
+Extraes un papelito enrollado a una  pata de silla que dice: “LENGUA Y LITERATURA. A Orfeo le encantaría esta estrofa  en particular”. 
+
+[[Si crees saber la solución...-&gt;X]] [[Si no...-&gt;12]]
+[[¿Quieres una pista?-&gt;16]]
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="51" name="50" tags="" position="350,950"> [[Sacas las tijeras de tu maletín y cortas el cable.-&gt;60]]</tw-passagedata>
+<tw-passagedata pid="52" name="51" tags="multi" position="500,950">&lt;%
+if (!s.lockDestroyed) {
+	s.lockDestroyed = true;
+%&gt;
+¿Habrá ocultado Rocko la bomba aquí? 
+
+Momento de comprobarlo: viertes un  poco de sulfúrico sobre el grillete del candado y este se debilita por el efecto corrosivo hasta que lo sueltas de un tirón. 
+&lt;% } 
+var s = story.state;
+s.solution = &quot;cromosoma&quot;;
+s.success = 53;
+s.failure = 8;
+s.toRemove = 25;
+%&gt;
+Abres el cajón... y no, no hay artefacto alguno en el interior. Mas sí una tablet, que al activarla exhibe burlona una de las adivinanzas de tu antagonista: “BIOLOGÍA. Colorea la droga feliz”. 
+
+[[Si crees que sabes la respuesta...-&gt;X]] [[Si no...-&gt;8]] 
+[[¿Necesitas una pista?-&gt;64]]</tw-passagedata>
+<tw-passagedata pid="53" name="52" tags="multi clock" position="653,950">&lt;%
+s.habilityTarget = 19;
+%&gt;
+Abres con tus llaves la puerta de 2ºA. 
+
+Empiezas a moverte por la clase mirando bajo las mesas, tras los respaldos de  las sillas, recorriendo cada porción de mueble, cada centímetro de pared. 
+En vano.  
+
+Pero... ¿te ha parecido oír algo en esa esquina? 
+
+[[Utiliza un # si lo deseas-&gt;#]] o bien [[ignora la sensación.-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="54" name="53" tags="" position="800,950">Expectante, tecleas tu conjetura para el acertijo de biología en la tablet. La  confirmación aparece al instante: 
+
+“Respuesta correcta. [[No cortes el cable ΦΔΩ”.-&gt;dont8]]</tw-passagedata>
+<tw-passagedata pid="55" name="54" tags="clock" position="950,950">He aquí las salas de tutoría, escenarios típicos de reprimendas de profesores  a alumnos por sus bajas calificaciones y de madres a hijos a causa de su mal comportamiento o nulo compromiso; si bien también, en esta singular escuela del siglo XXI, de reproches (cuando no amenazas) de padres a maestros y de salidas de tono  gratuitas de estudiantes ante la mirada inane de sus progenitores. 
+
+Casi experimentas un anticlímax cuando tu búsqueda arroja resultados negativos. [[Una pena.-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="56" name="55" tags="" position="1100,950">Introduces la solución al acertijo de Historia en tu móvil y acto seguido Rocko responde: 
+
+“Bien. [[No cortes el cable ΣΚΠ”.-&gt;dont8]]</tw-passagedata>
+<tw-passagedata pid="57" name="56" tags="clock" position="50,1100">&lt;%
+s.habilityTarget = 46;
+%&gt;
+2ºB tiene la puerta entornada.
+
+Si quieres entrar: [[usas un #-&gt;#]] o [[no lo haces.-&gt;66]]
+
+[[También puedes irte.-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="58" name="57" tags="" position="200,1100">Por desgracia, no es una cuestión de explorar mejor, sino de que realmente este lugar carece de misterio. 
+
+[[Has malgastado un #.-&gt;12]]  </tw-passagedata>
+<tw-passagedata pid="59" name="58" tags="multi" position="350,1100">&lt;%
+var s = story.state;
+s.solution = &quot;francio&quot;;
+s.success = 37;
+s.failure = 12;
+s.toRemove = 5;
+%&gt;
+
+Pulsas enter y sobre la superficie surgen tres palabras solitarias: “QUÍMICA. Metal gabacho”. 
+
+[[Si crees que sabes la solución...-&gt;X]] [[Si no...-&gt;12]]
+[[¿Necesitas una pista?-&gt;42]]</tw-passagedata>
+<tw-passagedata pid="60" name="59" tags="clock" position="500,1100">Giras tu llave y entras en secretaría, el dominio de Doña Yolanda (si es que  sigue en el puesto). 
+
+Inspeccionas el ordenador, la impresora, las dos fotocopiadoras  (todos apagados), la mesa tras la que se recibe a padres, alumnos y personal del  centro, los cajones, los archivos alfabéticamente ordenados... Nada. 
+
+Es entonces  cuando el fax, que por lo visto sí estaba operativo, vuelve a la vida y escupe una  hoja de papel. La tomas y lees:
+“¿Por qué consumes segundos buscando aquí?  Tendrás que hacerlo mejor”. 
+
+[[Sin comentarios.-&gt;12]]</tw-passagedata>
+<tw-passagedata pid="61" name="60" tags="" position="651,1100">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/fin.jpg&quot; alt=&quot;Es tu fin&quot; /&gt;
+
+Nada más cortar el cable adviertes que has errado; súbitamente, la cuenta  atrás del temporizador se acelera de manera radical y los segundos devienen centésimas.
+
+Rocko te ha vencido y estás condenado. 
+
+Instantes después llega tu FIN.
+
+[[Volver a jugar.-&gt;END]]</tw-passagedata>
+<tw-passagedata pid="62" name="61" tags="clock" position="800,1100">[[ El mañana es el futuro, en este caso gramatical.-&gt;2]]</tw-passagedata>
+<tw-passagedata pid="63" name="62" tags="" position="950,1100">[[Extraes las tijeras de tu maletín y cortas el cable.-&gt;60]]</tw-passagedata>
+<tw-passagedata pid="64" name="63" tags="" position="1100,1100">Cuando tiras del libro, dos más por cada lado le acompañan y se ciernen sobre ti. ¡Ese malnacido de Rocko los ha pegado! 
+
+Si usas un # mayor que 6, tus reflejos te permiten esquivarlos. Si no puedes o no quieres, escoge otro # que será restado a tu Salud.
+&lt;%
+s.habilityTarget = 78;
+%&gt;
+[[Tú decides.-&gt;#]]</tw-passagedata>
+<tw-passagedata pid="65" name="64" tags="clock" position="50,1250">La droga en cuestión es la de “Un mundo feliz”, de A. Huxley. [[Dale color.-&gt;51]]</tw-passagedata>
+<tw-passagedata pid="66" name="65" tags="" position="200,1250">No obstante, por una vez te sonríe la fortuna. 
+
+Cuando Rocko estaba manipulando la caja para situarla sobre el fluorescente, cometió un desliz. En uno de los  broches cromados tu adversario ha extraviado algo que puede suponer el fin de  sus fechorías: un cabello. 
+
+Seguro que usa guantes para no dejar huellas, pero el inseparable ADN no perdona. 
+
+Guardas el pelo en una bolsita de tu maletín y sales de  la sala con nuevo aliento. 
+&lt;%
+document.luisquin.recoverHability();
+%&gt;
+[[Recuperas un #.-&gt;8]]</tw-passagedata>
+<tw-passagedata pid="67" name="66" tags="" position="350,1250">&lt;%
+s.habilityTarget = 71;
+%&gt;
+Cuando empujas la puerta para entrar, una caja de cartón llena de trofeos  deportivos cae de repente sobre tu cabeza. 
+
+[[Usa un # y réstaselo a tu Salud.-&gt;#]] </tw-passagedata>
+<tw-passagedata pid="68" name="67" tags="" position="500,1250">[[Extraes las tijeras de tu maletín y cortas el cable.-&gt;60]]</tw-passagedata>
+<tw-passagedata pid="69" name="X" tags="" position="1334,208">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="70" name="69" tags="" position="658,1246">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/fin.jpg&quot; alt=&quot;Es tu fin&quot; /&gt;
+
+Se ha agotado tu tiempo.
+
+La cuenta  atrás del temporizador ha llegado a cero.
+
+Rocko te ha vencido y estás condenado. 
+
+FIN.
+
+[[Volver a jugar.-&gt;END]]</tw-passagedata>
+<tw-passagedata pid="71" name="#" tags="" position="1403,816">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="72" name="71" tags="" position="348,1393">&lt;%
+document.luisquin.decrementLives(s.habilityInUse);
+%&gt;
+[[Maldice  a Rocko y luego registra el aula.-&gt;26]]</tw-passagedata>
+<tw-passagedata pid="73" name="72" tags="" position="798,1246">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/fin.jpg&quot; alt=&quot;Es tu fin&quot; /&gt;
+
+Has sufrido demasiado daño.
+
+No tienes fuerzas para seguir.
+
+Rocko te ha vencido y estás condenado. 
+
+FIN.
+
+[[Volver a jugar.-&gt;END]]</tw-passagedata>
+<tw-passagedata pid="74" name="73" tags="" position="487,1393">&lt;%  
+	s.habilityTarget = 18;
+	document.luisquin.decrementLives(s.habilityInUse);
+%&gt;
+[[Intenta derribar la puerta de nuevo-&gt;#]] o [[desiste.-&gt;8]]
+</tw-passagedata>
+<tw-passagedata pid="75" name="74" tags="" position="648,1394">&lt;%
+document.luisquin.decrementLives(s.habilityInUse);
+%&gt;
+[[Maldice  a Rocko y luego registra el laboratorio.-&gt;47]]</tw-passagedata>
+<tw-passagedata pid="76" name="f" tags="" position="1299,1214">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="77" name="s" tags="" position="1424,1097">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="78" name="e" tags="" position="1441,962">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="79" name="78" tags="" position="812,1399">&lt;%
+document.luisquin.removePassageTags(33);
+if (s.habilityInUse &gt; 6) {
+%&gt;
+[[Sí, señor: reflejos felinos.-&gt;8]]
+&lt;% } else { 
+document.luisquin.decrementLives(s.habilityInUse);
+%&gt;
+[[¡Maldito Rocko!.-&gt;8]]
+&lt;% } %&gt;</tw-passagedata>
+<tw-passagedata pid="80" name="cable_cut" tags="" position="1389,581">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="81" name="dont12" tags="" position="1354,410">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="82" name="dont8" tags="" position="1488,412">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
+<tw-passagedata pid="83" name="END" tags="" position="1695,603">&lt;%
+document.luisquin.resetGame();
+%&gt;</tw-passagedata>
+</tw-storydata>
+       
+        <script src="js/lib.js"></script>
+        <script src="js/luisquin.js"></script>
+                
+    </body>
+</html>
