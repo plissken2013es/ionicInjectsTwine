@@ -1,14 +1,14 @@
 $(window).on('showpassage', function(){
 	console.log('showpassage event', window.passage.name);
 	if (!story.state.isWrapperPresent) {
-		$("body").prepend("<div id='wrapper'></div>");
+		/*$("body").prepend("<div id='wrapper'></div>");
 		$("#wrapper").append("<div id='fake-passage'></div>");
 		$("#fake-passage").hide();
         $("#wrapper").append("<div id='event-window'></div>");
 		$("#event-window").hide();
         $("#wrapper").append("<div id='info-panel'></div>");
         $("#wrapper").append("<div id='habilities-panel'></div>");
-        $("#wrapper").append("<div id='map-panel'></div>");
+        $("#wrapper").append("<div id='map-panel'></div>");*/
         document.luisquin.init();
 		story.state.isWrapperPresent = true;
 	}
@@ -22,11 +22,20 @@ $(window).on('showpassage:after', function(){
     document.luisquin.checkIfTimePasses();
     
 	var $el = $("#passage");
-	$("#passage").remove();
-	$("#wrapper").append($el);
+    
+	/*$("#passage").remove();
+	$("#wrapper").append($el);*/
+    
+    var borders = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5];
+    borders = document.luisquin.shuffleArray(borders);    
     $("#passage").children().each(function(i) {
+        $(this).addClass("border" + borders.pop());
         $(this).hide();
     });
+    $el.css("overflow-y", "scroll");
+    $el.css("height", ($(".pane").height() - $el.parent().position().top + 15)+"px");
+    console.log("calculando posición textos:", $(".pane").height(), " - ", $el.parent().position().top, $(".pane").height() - $el.parent().position().top);
+    
     $("#passage").show();
     $("#passage").children().each(function(index) {
         //console.log(index, $(this).text().match(/\w{1}/g).length, $(this).text());
@@ -54,6 +63,19 @@ $(window).on('hidepassage', function() {
 	$("#fake-passage").show().fadeOut(1000);
 });
 
+/*
+setParagraphs: function() {
+    console.log("setting paragraphs!");
+    var borders = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5];
+    borders = this.shuffle(borders);
+    //var pels = document.getElementById("txt").getElementsByTagName("p");
+    var $pels = $("#txt p");
+
+    for (var i=0; i<$pels.length; i++) {
+        $($pels[i]).addClass("border" + borders.pop());
+    }
+}
+*/
 
 document.luisquin = {
     init: function() {
