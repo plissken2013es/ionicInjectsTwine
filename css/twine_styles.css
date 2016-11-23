@@ -10,7 +10,7 @@ body {
 }
 
 a:hover {
-    background-color: greenyellow;
+    background-color: none;
 }
 
 a.closed-exit:hover {

@@ -151,3 +151,11 @@ body {
     float: left;
     display: none;
 }
+
+/* -------- modal START-----------*/
+.card {
+    box-shadow: none;
+}
+.title {
+    font-family: 'Balloon', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}

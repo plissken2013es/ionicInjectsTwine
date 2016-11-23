@@ -53,8 +53,8 @@ $(window).on('showpassage:after', function() {
     }
     
 	console.log('showpassage:after event', window.passage.name, passage.tags);
-    console.log("passage has tag multi?", document.luisquin.passageHasTag(window.passage.name, "multi"));
-    console.log("passage has tag clock?", document.luisquin.passageHasTag(window.passage.name, "clock"));
+    console.info("passage has tag multi?", document.luisquin.passageHasTag(window.passage.name, "multi"));
+    console.info("passage has tag clock?", document.luisquin.passageHasTag(window.passage.name, "clock"));
     
     checkIntroPassages();
     document.luisquin.checkIfTimePasses();
@@ -224,10 +224,10 @@ document.luisquin = {
             var exit = $(this).attr("data-passage");
             if (exit === "X") {
                 $(this).removeAttr("data-passage");
-                $(this).attr("href", "javascript:document.luisquin.solveMistery("+passage.name+")");
+                $(this).attr("onclick", "document.luisquin.solveMistery("+passage.name+")");
             } else if (exit === "#") {
                 $(this).removeAttr("data-passage");
-                $(this).attr("href", "javascript:document.luisquin.launchHabilitySelection("+passage.name+")");
+                $(this).click(passage.name, document.luisquin.launchHabilitySelection.bind(document.luisquin));
             } else if (exit === "f" || exit === "s" || exit === "e") {
                 $(this).removeAttr("data-passage");
                 $(this).attr("id", "lab_potion_" + exit);
@@ -254,12 +254,13 @@ document.luisquin = {
     },
     checkIfTimePasses: function() {
         if (document.luisquin.passageHasTag(passage.name, "clock")) {
-            $("#event-window").append("<div id='clock'></div>");
-            $("#clock").append(story.state.clockImage);
-            $("#event-window").fadeIn(750).delay(2000).fadeOut(750, function() {
-                $("#clock").remove();
+            this.$scope.openModalClock();
+            setTimeout(function() {
+                this.$scope.closeModalClock();
+            }.bind(this), 2500);
+            setTimeout(function() {
                 document.luisquin.decrementClock();
-            });
+            }.bind(this), 3000);
         }
     },
     createLetterOptions: function(letterExcluded) {
@@ -276,15 +277,12 @@ document.luisquin = {
         }
         return letterOptions;
     },
-    
     decrementClock: function() {
         story.state.numClocks--;
         if (story.state.numClocks < 0) {
             story.show(70); // ending by time run out
         } else {
-            $("#clockIcon"+story.state.numClocks).fadeOut(1500, function() {
-                $(this).remove();
-            });
+            $("#timeIndicator h2").text(story.state.numClocks);
         }
     },
     decrementLives: function(dmg) {
@@ -338,7 +336,11 @@ document.luisquin = {
         }
         return false;
     },
-    launchHabilitySelection: function(psgName) {
+    launchHabilitySelection: function(ev) {
+        console.log("launchHabilitySelection at", ev.data);
+        console.log(this.$scope);
+        var psgName = ev.data;
+        this.$scope.openModal(psgName);
         var s = story.state;
         $("#event-window").append("<div id='hability-selection'></div>").css("opacity", 0.9);
         for (var q=0; q<story.state.habilities.length; q++) {
@@ -355,6 +357,10 @@ document.luisquin = {
             });
         });
         $("#event-window").fadeIn(750);
+    },
+    loadScope: function(ionicScope) {
+        console.log(ionicScope);
+        this.$scope = ionicScope;
     },
     moveHero: function() {
         var coords = story.state.heroCoords[window.passage.name] || null;
@@ -486,6 +492,7 @@ document.luisquin = {
         return input;
     },
     solveMistery: function(psgName) {
+        console.log("solve mistery at", psgName);
         var s = story.state;
         /*
         var answer = prompt("¿Cuál es la respuesta? " + s.solution + " " + s.success + " " + s.failure);
@@ -538,7 +545,6 @@ document.luisquin = {
         story.state.objects += obj;
         $("#object_"+obj).hide().delay(pause).fadeIn(1500);
     },
-    
     useHability: function(habNumber) {
         document.luisquin.removeHability(habNumber);
         $("#habPanel_" + habNumber + ", #hab_" + habNumber).fadeOut(750, function() {

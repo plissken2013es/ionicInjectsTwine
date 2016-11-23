@@ -7,7 +7,6 @@ angular.module('countdown', ['ionic', 'countdown.controllers', 'countdown.servic
         templateUrl: "templates/game.html",
         controller: 'GameCtrl'
     })
-
     // If none of the above states are matched, use this as the fallback:
     $urlRouterProvider.otherwise('game');
 })

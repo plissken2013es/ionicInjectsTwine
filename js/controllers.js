@@ -1,9 +1,38 @@
 angular.module("countdown.controllers", [])
 
-.controller('GameCtrl', function($scope, HttpService, CountdownFactory) {
+.controller('GameCtrl', function($scope, HttpService, CountdownFactory, $ionicModal) {
     $scope.itemsToLoad = 2;
     $scope.twineContainers = '<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script>';
     $scope.userScripts = [];
+        
+    $ionicModal.fromTemplateUrl("templates/modal.html", {
+        scope: $scope,
+        animation: "slide-in-up"
+    }).then(function(modal) {
+        $scope.modal = modal;
+    })
+    $ionicModal.fromTemplateUrl("templates/modalClock.html", {
+        scope: $scope,
+        animation: "slide-in-up"
+    }).then(function(modal) {
+        $scope.modalClock = modal;
+    });
+    
+    $scope.openModal = function(psg) {
+        console.log("ionic open modal", psg);
+        $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+    };    
+    $scope.openModalClock = function() {
+        console.log("ionic open modal clock");
+        $scope.modalClock.show();
+    };
+    $scope.closeModalClock = function() {
+        $scope.modalClock.hide();
+    };
+    
     $scope.checkAppStart = function() {
         if ($scope.itemsToLoad <= 0) {
             console.log("app should start now");
@@ -11,6 +40,7 @@ angular.module("countdown.controllers", [])
                 if (window.story) {
                     window.story.userScripts = $scope.userScripts;
                     window.story.start();
+                    document.luisquin.loadScope($scope);
                     clearInterval(interval);
                 }
             }.bind(this), 250);
@@ -57,5 +87,4 @@ angular.module("countdown.controllers", [])
                     $scope.checkAppStart();
                 });
         });
-    
 });
