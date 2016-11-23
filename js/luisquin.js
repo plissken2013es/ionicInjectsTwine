@@ -39,7 +39,7 @@ $(window).on('showpassage:after', function() {
                 countWords = 0;
             }
             $el.append(index);
-            index.hide().delay((count+1)*1000).fadeIn(1500 + countWords*10);
+            index.hide().delay((count+1)*document.luisquin.TEXT_TOUT).fadeIn(1500);
             count++;
         });
     }
@@ -79,6 +79,7 @@ $(window).on('hidepassage', function() {
 });
 
 document.luisquin = {
+    TEXT_TOUT: 150,
     init: function() {
         document.story = story;
         story.state.vowels = ["a", "e", "i", "o", "u"];
@@ -150,10 +151,10 @@ document.luisquin = {
             down_floor: new Image(),
             up_floor: new Image()
         };
-        story.state.map.down_floor.src = "img/down_floor.png";
+        story.state.map.down_floor.src = "img/down_floor_720.png";
         story.state.map.down_floor.setAttribute("class", "map-image");
         story.state.map.down_floor.setAttribute("id", "down_map");
-        story.state.map.up_floor.src = "img/up_floor.png";
+        story.state.map.up_floor.src = "img/up_floor_720.png";
         story.state.map.up_floor.setAttribute("class", "map-image");
         story.state.map.up_floor.setAttribute("id", "up_map");
         
@@ -205,7 +206,19 @@ document.luisquin = {
         story.state.numLives = 5;
         $("#lifeIndicator h2").text(story.state.numLives);
     },
-    
+    calculateMapProportions: function() {
+        if (!this.$hero) this.$hero = $("#hero");
+        // el mapa tiene 720 x 417 píxeles
+        var $mapImg = $(".map-image");
+        if (!this.$map) this.$map = $(".map");
+        var mapW = $mapImg.width();
+        var mapH = ($mapImg.width() / 720 * 417) | 0;
+        console.log("calculateMapProportions", $mapImg.position(), $mapImg.width(), ($mapImg.width() / 720 * 417) | 0);
+        
+        // el mapa original medía 635 x 359 px, calculamos las constantes de proporción
+        this.kx = mapW / 635;
+        this.ky = mapH / 359;
+    },
     checkExits: function() {
         $("#passage a").each(function(index) {
             var exit = $(this).attr("data-passage");
@@ -239,7 +252,6 @@ document.luisquin = {
             }
         });
     },
-    
     checkIfTimePasses: function() {
         if (document.luisquin.passageHasTag(passage.name, "clock")) {
             $("#event-window").append("<div id='clock'></div>");
@@ -250,7 +262,6 @@ document.luisquin = {
             });
         }
     },
-    
     createLetterOptions: function(letterExcluded) {
         var NUM_OPTIONS = 4;
         var allLetters = story.state.vowels.concat(story.state.consonants);
@@ -276,7 +287,6 @@ document.luisquin = {
             });
         }
     },
-    
     decrementLives: function(dmg) {
         dmg = Number(dmg);
         story.state.numLives -= dmg;
@@ -294,24 +304,11 @@ document.luisquin = {
             dmg--;
         }
     },
-    
     drawMap: function() {
         var currentPsg = Number(window.passage.id);
         console.log("currentPasage: ", currentPsg);
         if (currentPsg <= 2) return;
-        var $map = $("#map-panel");
-        if (currentPsg == 8) {
-            $map.append(story.state.map["down_floor"]).append("<br />").append(story.state.map["up_floor"]).addClass("map-collapsed");
-            $("#map-panel").unbind("click");
-            $("#map-panel").click(function(ev) {
-                if ($map.hasClass("map-collapsed")) {
-                    $map.removeClass("map-collapsed");
-                } else {
-                    $map.addClass("map-collapsed");
-                }
-            });
-            return;
-        }
+        var $map = $(".map");
         
         var whichPassage = Number(passage.name);
         if (whichPassage && story.state.heroCoords[whichPassage]) story.state.lastMap = whichPassage;
@@ -319,15 +316,13 @@ document.luisquin = {
         var oppMap = currMap === "up" ? "down" : "up";
         
         console.log("hiding:", $("#"+oppMap+"_map"));
-        $("#"+oppMap+"_map").hide(750, function() {
-            console.log("hiding complete!");
+        $("#"+oppMap+"_map").fadeOut(150, function() {
+            console.log("map hiding complete!");
             $("#"+oppMap+"_map").remove();
-            $("#map-panel>br").remove();
-            $map.append(story.state.map[currMap + "_floor"]).append(story.state.hero).addClass("map-collapsed");
-            $(".map-image").show(750);
+            $map.append(story.state.map[currMap + "_floor"]).append(story.state.hero);
+            $(".map-image").fadeIn(150);
         });
     },
-    
     dropObject: function(obj, pause) {
         if (!pause || isNaN(pause)) pause = 0;
         story.state.objects = story.state.objects.replace(obj, "");
@@ -335,7 +330,6 @@ document.luisquin = {
             $(this).remove();
         });
     },
-    
     isVowel: function(letter) {
         for (var q=story.state.vowels.length; q--;) {
             if (story.state.vowels[q] === letter) {
@@ -344,7 +338,6 @@ document.luisquin = {
         }
         return false;
     },
-    
     launchHabilitySelection: function(psgName) {
         var s = story.state;
         $("#event-window").append("<div id='hability-selection'></div>").css("opacity", 0.9);
@@ -363,10 +356,9 @@ document.luisquin = {
         });
         $("#event-window").fadeIn(750);
     },
-    
     moveHero: function() {
         var coords = story.state.heroCoords[window.passage.name] || null;
-        var $map = $("#map-panel");
+        var $map = $(".map");
         if (coords) {
             $map.children().each(function(i) {
                 if ($(this).attr("id") === "hero") {
@@ -375,20 +367,28 @@ document.luisquin = {
                 }
             });
             $map.append(story.state.hero);
-            $("#hero").animate({
-                left:   coords.x+"px",
-                top:    coords.y+"px"
+            this.calculateMapProportions();
+            $hero = this.$hero;
+            $hero.css("width", "64");
+            $hero.css("height", "64");
+            var heroX = this.$map.position().left + (coords.x*this.kx) - this.$hero.width()/4;
+            var heroY = this.$map.position().top + (coords.y*this.ky) - this.$hero.height()/8;
+            $hero.animate({
+                left:   heroX+"px",
+                top:    heroY+"px"
             }, 
             1500, 
             function() {
                 // Animation complete.
                 console.log("hero animation complete!");
+                if ($hero.css("display") == "none") {
+                    $hero.fadeIn("slow");
+                } 
             });
         } else {
             console.log("not moving hero");
         }
     },
-    
     onLetterClicked: function(letter) {
         letter = letter.toLowerCase();
         console.log("letter:", letter);
@@ -421,7 +421,6 @@ document.luisquin = {
             });
         }
     },
-    
     passageHasTag: function(psgName, tag) {
         var psgNumber = Number(psgName) + 1;
         if (isNaN(psgNumber)) return false;
@@ -431,7 +430,6 @@ document.luisquin = {
         }
         return false;
     },
-    
     recoverHability: function() {
         for (var q = 0; q<10; q++) {
             console.log("comprobando", q, story.state.habilities[q])
@@ -444,7 +442,6 @@ document.luisquin = {
             }
         }
     },
-    
     removeHability: function(habNumber) {
         for (var q = 0; q < story.state.habilities.length; q++) {
             if (story.state.habilities[q] === habNumber) {
@@ -453,7 +450,6 @@ document.luisquin = {
             }
         }
     },
-    
     removeLetterFromArray: function(letter, arr) {
         for (var q=arr.length; q--;) {
             if (arr[q] === letter) {
@@ -463,14 +459,12 @@ document.luisquin = {
         }
         return arr;
     },
-    
     removePassageTags: function(psgName) {
         var psgNumber = Number(psgName) + 1;
         if (isNaN(psgNumber)) return;
         var psg = story.passages[psgNumber];
         psg.tags = [];
     },
-    
     resetGame: function() {
         console.log("reset game");
         $("#map-panel").children().each(function(i) {
@@ -481,7 +475,6 @@ document.luisquin = {
             story.show(1);
         }, 750);
     },
-    
     shuffleArray: function(input) {
         for (var i = input.length-1; i >=0; i--) {
             var randomIndex = Math.floor(Math.random()*(i+1)); 
@@ -492,7 +485,6 @@ document.luisquin = {
         }
         return input;
     },
-    
     solveMistery: function(psgName) {
         var s = story.state;
         /*
@@ -526,7 +518,6 @@ document.luisquin = {
         });
         $("#event-window").fadeIn(750);
     },
-    
     sumLetters: function(text) {
         var sum = 0;
         for (var q=text.length; q--;) {
@@ -534,7 +525,6 @@ document.luisquin = {
         }
         return sum;
     },
-    
     takeLabPotion: function(potion) {
         $("#lab_potion_"+potion).removeAttr("href").addClass("closed-exit");
         document.luisquin.takeObject(potion);
@@ -542,7 +532,6 @@ document.luisquin = {
             story.show(Number(story.state.habilityTarget+1));
         }
     },
-    
     takeObject: function(obj, pause) {
         $("#info-panel").append(story.state.objectImages[obj]);
         if (!pause || isNaN(pause)) pause = 0;

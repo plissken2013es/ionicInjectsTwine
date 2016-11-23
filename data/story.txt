@@ -13,7 +13,7 @@ Te levantas, te vistes y coges tu maletín. Contactas con  la policía para que 
 Sobre  todo, que no intervengan. Rocko solo te quiere a TI.
 ¿Serás capaz de ganarle la partida esta vez? 
 
-[[Compruébalo.-&gt;1]]</tw-passagedata>
+[[Compruébalo-&gt;1]].</tw-passagedata>
 
 <tw-passagedata pid="2" name="1" tags="" position="200,50">Llegas con tu coche al instituto, con el corazón latiéndote con fuerza.
 
@@ -21,7 +21,7 @@ La directora te espera en la puerta; te dice que el centro está vacío y te ent
 
 Con  el rostro asustado y mirada suplicante te desea suerte. Le diriges una sonrisa: la vas  a necesitar. Sabes que siempre que Rocko elige un escenario se hace dueño de él horas antes. Estás a su merced.
 
-[[Pero le has vencido otras veces y lo harás de nuevo.-&gt;7]]  </tw-passagedata>
+Pero le has vencido otras veces y [[lo harás de nuevo-&gt;7]].  </tw-passagedata>
 <tw-passagedata pid="3" name="2" tags="multi" position="350,50">Sacas el radiocasete de su jaula de cristal y lo enchufas a la red.
 
 Expectante,  aunque irritado por los jueguecitos de tu némesis, le das al play. 
@@ -98,7 +98,7 @@ Hay servicios en ambas plantas.
 
 Cuando te estás planteando por  dónde empezar, un mensaje brota en tu móvil: “Para que veas que soy generoso, te  diré que la bomba no está ni en el recreo ni el polideportivo”. Todo un altruista,  este Rocko. 
 
-[[Si empiezas por abajo...-&gt;12]] [[Si vas arriba...-&gt;8]]  </tw-passagedata>
+Si empiezas por [[abajo-&gt;12]]... Si vas [[arriba-&gt;8]]...  </tw-passagedata>
 <tw-passagedata pid="9" name="8" tags="multi" position="50,200">Estás en el pasillo de la planta superior. 
 
 Puedes investigar las clases de 1º de  Bachiller ([[grupo G-&gt;36]], [[grupo H-&gt;11]]), 2º de Bachiller ([[grupo G-&gt;39]], [[grupo H-&gt;9]]), las de [[desdobles-&gt;41]], la [[sala de  profesores-&gt;25]]), la de [[informática-&gt;28]], los [[servicios-&gt;15]], el [[laboratorio-&gt;47]], el [[aula de idiomas-&gt;31]] o la [[biblioteca-&gt;33]]. 

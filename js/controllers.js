@@ -7,10 +7,13 @@ angular.module("countdown.controllers", [])
     $scope.checkAppStart = function() {
         if ($scope.itemsToLoad <= 0) {
             console.log("app should start now");
-            setTimeout(function() {
-                window.story.userScripts = $scope.userScripts;
-                window.story.start();
-            }.bind(this), 300);
+            var interval = setInterval(function() {
+                if (window.story) {
+                    window.story.userScripts = $scope.userScripts;
+                    window.story.start();
+                    clearInterval(interval);
+                }
+            }.bind(this), 250);
         }
     };
     
