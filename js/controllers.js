@@ -1,14 +1,16 @@
 angular.module("countdown.controllers", [])
 
-.controller('GameCtrl', function($scope, HttpService) {
+.controller('GameCtrl', function($scope, HttpService, CountdownFactory) {
     $scope.itemsToLoad = 2;
     $scope.twineContainers = '<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script>';
     $scope.userScripts = [];
     $scope.checkAppStart = function() {
         if ($scope.itemsToLoad <= 0) {
             console.log("app should start now");
-            window.story.userScripts = $scope.userScripts;
-            window.story.start();
+            setTimeout(function() {
+                window.story.userScripts = $scope.userScripts;
+                window.story.start();
+            }.bind(this), 300);
         }
     };
     

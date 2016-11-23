@@ -14,39 +14,54 @@ $(window).on('showpassage', function(){
 	}
 });
 
-$(window).on('showpassage:after', function(){
+$(window).on('showpassage:after', function() {
+    function setParagraphs(passage) {
+        var paragraphs = [];
+        var borders = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5];
+        borders = document.luisquin.shuffleArray(borders);  
+        
+        $el.children().each(function(i) {
+            $(this).addClass("border" + borders.pop());
+            paragraphs.push($(this));
+            $(this).remove();
+        });
+        $el.css("overflow-y", "scroll");
+        $el.css("height", ($(".pane").height() - $el.parent().position().top + 15)+"px");
+        console.log("calculando posición textos:", $(".pane").height(), " - ", $el.parent().position().top, $(".pane").height() - $el.parent().position().top);
+
+        $el.show();
+        var count = 0;
+        paragraphs.forEach(function(index) {
+            var countWords = index.text().match(/\s{1}/g);
+            if (countWords) {
+                countWords = countWords.length;
+            } else {
+                countWords = 0;
+            }
+            $el.append(index);
+            index.hide().delay((count+1)*1000).fadeIn(1500 + countWords*10);
+            count++;
+        });
+    }
+    
+    function checkIntroPassages() {
+        var introPsg = [1, 2, 8];
+        if (introPsg.indexOf(Number(window.passage.id)) < 0) {
+            $(".information").fadeIn("slow");
+            $(".map").fadeIn("slow");
+        }
+    }
+    
 	console.log('showpassage:after event', window.passage.name, passage.tags);
     console.log("passage has tag multi?", document.luisquin.passageHasTag(window.passage.name, "multi"));
     console.log("passage has tag clock?", document.luisquin.passageHasTag(window.passage.name, "clock"));
     
+    checkIntroPassages();
     document.luisquin.checkIfTimePasses();
     
 	var $el = $("#passage");
+    setParagraphs($el);
     
-	/*$("#passage").remove();
-	$("#wrapper").append($el);*/
-    
-    var borders = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5];
-    borders = document.luisquin.shuffleArray(borders);    
-    $("#passage").children().each(function(i) {
-        $(this).addClass("border" + borders.pop());
-        $(this).hide();
-    });
-    $el.css("overflow-y", "scroll");
-    $el.css("height", ($(".pane").height() - $el.parent().position().top + 15)+"px");
-    console.log("calculando posición textos:", $(".pane").height(), " - ", $el.parent().position().top, $(".pane").height() - $el.parent().position().top);
-    
-    $("#passage").show();
-    $("#passage").children().each(function(index) {
-        //console.log(index, $(this).text().match(/\w{1}/g).length, $(this).text());
-        var countWords = $(this).text().match(/\s{1}/g);
-        if (countWords) {
-            countWords = countWords.length;
-        } else {
-            countWords = 0;
-        }
-        $(this).delay((index+1)*1000).fadeIn(1500 + countWords*10);
-    });
     var whichPassage = Number(passage.name);
     if (isNaN(whichPassage)) whichPassage = 0;
     story.state.alreadyVisited[whichPassage] = true;
@@ -62,20 +77,6 @@ $(window).on('hidepassage', function() {
 	$("#fake-passage").html($("#passage").html());
 	$("#fake-passage").show().fadeOut(1000);
 });
-
-/*
-setParagraphs: function() {
-    console.log("setting paragraphs!");
-    var borders = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5];
-    borders = this.shuffle(borders);
-    //var pels = document.getElementById("txt").getElementsByTagName("p");
-    var $pels = $("#txt p");
-
-    for (var i=0; i<$pels.length; i++) {
-        $($pels[i]).addClass("border" + borders.pop());
-    }
-}
-*/
 
 document.luisquin = {
     init: function() {
@@ -141,7 +142,7 @@ document.luisquin = {
         story.state.lastMap = 12;
         
         story.state.hero = new Image();
-        story.state.hero.src = "http://www.luisquin.es/lq/laCuentaAtras/img/hero.png";
+        story.state.hero.src = "img/hero_128.png";
         story.state.hero.setAttribute("id", "hero");
         story.state.hero.setAttribute("style", "left: " + story.state.heroCoords[story.state.lastMap].x + "px; top: " + story.state.heroCoords[story.state.lastMap].y + "px;");
         
@@ -149,10 +150,10 @@ document.luisquin = {
             down_floor: new Image(),
             up_floor: new Image()
         };
-        story.state.map.down_floor.src = "http://www.luisquin.es/lq/laCuentaAtras/img/down_floor.png";
+        story.state.map.down_floor.src = "img/down_floor.png";
         story.state.map.down_floor.setAttribute("class", "map-image");
         story.state.map.down_floor.setAttribute("id", "down_map");
-        story.state.map.up_floor.src = "http://www.luisquin.es/lq/laCuentaAtras/img/up_floor.png";
+        story.state.map.up_floor.src = "img/up_floor.png";
         story.state.map.up_floor.setAttribute("class", "map-image");
         story.state.map.up_floor.setAttribute("id", "up_map");
         
@@ -166,30 +167,21 @@ document.luisquin = {
             s: new Image(),
             e: new Image()
         };
-        story.state.objectImages.t.src = "http://www.luisquin.es/lq/laCuentaAtras/img/t.png";
-        story.state.objectImages.z.src = "http://www.luisquin.es/lq/laCuentaAtras/img/z.png";
-        story.state.objectImages.c.src = "http://www.luisquin.es/lq/laCuentaAtras/img/c.png";
-        story.state.objectImages.p.src = "http://www.luisquin.es/lq/laCuentaAtras/img/p.png";
-        story.state.objectImages.f.src = "http://www.luisquin.es/lq/laCuentaAtras/img/f.png";
-        story.state.objectImages.s.src = "http://www.luisquin.es/lq/laCuentaAtras/img/s.png";
-        story.state.objectImages.e.src = "http://www.luisquin.es/lq/laCuentaAtras/img/e.png";
+        story.state.objectImages.t.src = "img/t.png";
+        story.state.objectImages.z.src = "img/z.png";
+        story.state.objectImages.c.src = "img/c.png";
+        story.state.objectImages.p.src = "img/p.png";
+        story.state.objectImages.f.src = "img/f.png";
+        story.state.objectImages.s.src = "img/s.png";
+        story.state.objectImages.e.src = "img/e.png";
         for (var obj in story.state.objectImages) {
             story.state.objectImages[obj].setAttribute("id", "object_" + obj);
-            story.state.objectImages[obj].setAttribute("width", "32px");
-            story.state.objectImages[obj].setAttribute("height", "32px");
         };
         
         story.state.clockImage = new Image();
-        story.state.clockImage.src = "http://www.luisquin.es/lq/laCuentaAtras/img/hourglass.gif";
+        story.state.clockImage.src = "img/hourglass.gif";
         
-        story.state.clocks = [];
         story.state.numClocks = 15;
-        
-        for (q=story.state.numClocks; q--;) {
-            var clk = new Image();
-            clk.src = "http://www.luisquin.es/lq/laCuentaAtras/img/hourglass-icon.png";
-            story.state.clocks.push(clk);
-        }
         
         story.state.alreadyVisited = [];
         for (var q=story.passages.length-1; q--;) {
@@ -197,18 +189,7 @@ document.luisquin = {
         }
         console.log(story.state.alreadyVisited);
         
-        $("#info-panel").children().each(function(i) {
-            $(this).remove();
-        });
-        for (q=story.state.numClocks; q--;) {
-            $("#info-panel").append(story.state.clocks[q]);
-        }
-        $("#info-panel").children().each(function(i) {
-            $(this).attr("id", "clockIcon"+i);
-            $(this).attr("width", "32px");
-            $(this).attr("height", "32px");
-        });
-        $("#info-panel").append("<div id='info-panel-title'>Tiempo</div>");
+        $("#timeIndicator h2").text(story.state.numClocks);
         
         story.state.habilities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         $("#habilities-panel").children().each(function(i) {
@@ -220,24 +201,9 @@ document.luisquin = {
         }
         $("#habilities-panel").append("<span id='lives'></span>");
         $("#habilities-panel").append("<div id='habilities-panel-title2'>Vidas</div>");
-        story.state.lives = [];
+        
         story.state.numLives = 5;
-        for (q=story.state.numLives; q--;) {
-            var heart = new Image();
-            heart.src = "http://www.luisquin.es/lq/laCuentaAtras/img/heart-icon.png";
-            story.state.lives.push(heart);
-        }
-        $("#lives").children().each(function(i) {
-            $(this).remove();
-        });
-        for (q=story.state.numLives; q--;) {
-            $("#lives").append(story.state.lives[q]);
-        }
-        $("#lives").children().each(function(i) {
-            $(this).attr("id", "life_"+i);
-            $(this).attr("width", "32px");
-            $(this).attr("height", "32px");
-        });
+        $("#lifeIndicator h2").text(story.state.numLives);
     },
     
     checkExits: function() {
@@ -331,7 +297,7 @@ document.luisquin = {
     
     drawMap: function() {
         var currentPsg = Number(window.passage.id);
-        console.log("currentPSG: ", currentPsg);
+        console.log("currentPasage: ", currentPsg);
         if (currentPsg <= 2) return;
         var $map = $("#map-panel");
         if (currentPsg == 8) {

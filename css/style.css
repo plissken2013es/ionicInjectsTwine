@@ -39,6 +39,9 @@ body {
 .list {
     margin-bottom: 0;
 }
+.list .item h2 {
+    color: white;
+}
 .map img {
     width: 100%;
 }
