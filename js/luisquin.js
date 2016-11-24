@@ -159,22 +159,39 @@ document.luisquin = {
         story.state.map.up_floor.setAttribute("id", "up_map");
         
         story.state.objects = "";  // when full, is equal to "tzcpfse" in any possible order 
-        story.state.objectImages = {
-            t: null,
-            z: null,
-            c: null,
-            p: null,
-            f: null,
-            s: null,
-            e: null
-        };
-        story.state.objectImages.t = "<img src='img/t.png'>";
-        story.state.objectImages.z = "<img src='img/z.png'>";
-        story.state.objectImages.c = "<img src='img/c.png'>";
-        story.state.objectImages.p = "<img src='img/p.png'>";
-        story.state.objectImages.f = "<img src='img/f.png'>";
-        story.state.objectImages.s = "<img src='img/s.png'>";
-        story.state.objectImages.e = "<img src='img/e.png'>";
+        story.state.objectImages = {};
+        story.state.objectImages.z      = "<img src='img/z.png'>";
+        story.state.objectImages.c      = "<img src='img/c.png'>";
+        
+        story.state.objectImages.s      = "<img src='img/s.png'>";
+        story.state.objectImages.s_b_img= "img/s_big.png";
+        story.state.objectImages.s_big  = "img/s_big.png";
+        story.state.objectImages.s_tit  = "Veneno";
+        story.state.objectImages.s_desc = "Sustancia tóxica. No es recomendable ingerirla o que entre en contacto con la piel.";
+        
+        story.state.objectImages.p      = "<img src='img/p.png'>";
+        story.state.objectImages.p_b_img= "img/p_big.png";
+        story.state.objectImages.p_big  = "img/p_big.png";
+        story.state.objectImages.p_tit  = "Lápiz óptico";
+        story.state.objectImages.p_desc = "Periférico que se puede conectar a una amplia gama de equipos informáticos. ¿Quieres ser el Cervantes o el Goya del siglo XXI?";
+        
+        story.state.objectImages.t      = "<img src='img/t.png'>";
+        story.state.objectImages.t_b_img= "img/t_big.png";
+        story.state.objectImages.t_big  = "img/t_big.png";
+        story.state.objectImages.t_tit  = "Casete";
+        story.state.objectImages.t_desc = "Una cinta de casete que tu archienemigo ha dejado para ti. ¿Qué utilidad tiene?";
+        
+        story.state.objectImages.f      = "<img src='img/f.png'>";
+        story.state.objectImages.f_b_img= "img/f_big.png";
+        story.state.objectImages.f_big  = "img/f_big.png";
+        story.state.objectImages.f_tit  = "Cloroformo";
+        story.state.objectImages.f_desc = "Si te apetece echar una cabezadita, puedes inhalar un poco. Puede llegar a ser peligroso.";
+        
+        story.state.objectImages.e      = "<img src='img/e.png'>";
+        story.state.objectImages.e_b_img= "img/e_big.png";
+        story.state.objectImages.e_big  = "img/e.png";
+        story.state.objectImages.e_tit  = "Alcohol 96º";
+        story.state.objectImages.e_desc = "La utilidad médica de esta sustancia es innegable.";
         
         story.state.clockImage = new Image();
         story.state.clockImage.src = "img/hourglass.gif";
@@ -540,6 +557,17 @@ document.luisquin = {
         if (!pause || isNaN(pause)) pause = 0;
         story.state.objects += obj;
         $("#object_"+obj).hide().delay(pause).fadeIn(1500);
+        var bigImg = story.state.objectImages[obj+"_big"];
+        if (bigImg) {
+            var title = story.state.objectImages[obj+"_tit"];
+            var desc = story.state.objectImages[obj+"_desc"];
+            $("#object_"+obj).bind("click", function() {
+                this.$scope.openModalObject(bigImg, title, desc);
+            }.bind(this));
+            setTimeout(function() {
+                this.$scope.openModalObject(bigImg, title, desc);
+            }.bind(this), 1500+pause);
+        }
     },
     useHability: function(habNumber) {
         console.log("useHability", habNumber);

@@ -9,25 +9,31 @@ angular.module("countdown.controllers", [])
         scope: $scope,
         animation: "slide-in-up"
     }).then(function(modal) {
-        $scope.modal = modal;
-    })
+        $scope.modalHabilities = modal;
+    });
     $ionicModal.fromTemplateUrl("templates/modalClock.html", {
         scope: $scope,
         animation: "slide-in-up"
     }).then(function(modal) {
         $scope.modalClock = modal;
     });
+    $ionicModal.fromTemplateUrl("templates/modalObjectFound.html", {
+        scope: $scope,
+        animation: "slide-in-up"
+    }).then(function(modal) {
+        $scope.modalObject = modal;
+    });
     
     $scope.openModalHabilities = function(psg, hab) {
         console.log("ionic open modal Habilities", psg, hab);
-        $scope.modal.show();
+        $scope.modalHabilities.show();
         $(".button-small").hide();
         hab.forEach(function(val, i) {
             $("#btn"+val).show();
         });
     };
     $scope.closeModalHabilities = function() {
-        $scope.modal.hide();
+        $scope.modalHabilities.hide();
     };    
     $scope.openModalClock = function() {
         console.log("ionic open modal clock");
@@ -35,6 +41,16 @@ angular.module("countdown.controllers", [])
     };
     $scope.closeModalClock = function() {
         $scope.modalClock.hide();
+    };
+    $scope.openModalObject = function(img, title, desc) {
+        console.log("ionic open modal object");
+        $scope.modalObject.show();
+        $("#objContainer").attr("src", img);
+        $("#objTitle").text(title);
+        $("#objDesc").text(desc);
+    };
+    $scope.closeModalObject = function() {
+        $scope.modalObject.hide();
     };
     
     $scope.checkAppStart = function() {

@@ -170,11 +170,14 @@ a.closed-exit {
 #modalClock {
     opacity: 0.65;
 }
-#modalClock .card {
-    box-shadow: none
+#modalObject {
+    opacity: 0.85;
 }
 .modal .title {
     font-family: 'Balloon', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}
+.card {
+    box-shadow: none
 }
 @keyframes blink {  
     0% { color: red; }
