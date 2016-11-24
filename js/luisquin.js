@@ -160,24 +160,21 @@ document.luisquin = {
         
         story.state.objects = "";  // when full, is equal to "tzcpfse" in any possible order 
         story.state.objectImages = {
-            t: new Image(),
-            z: new Image(),
-            c: new Image(),
-            p: new Image(),
-            f: new Image(),
-            s: new Image(),
-            e: new Image()
+            t: null,
+            z: null,
+            c: null,
+            p: null,
+            f: null,
+            s: null,
+            e: null
         };
-        story.state.objectImages.t.src = "img/t.png";
-        story.state.objectImages.z.src = "img/z.png";
-        story.state.objectImages.c.src = "img/c.png";
-        story.state.objectImages.p.src = "img/p.png";
-        story.state.objectImages.f.src = "img/f.png";
-        story.state.objectImages.s.src = "img/s.png";
-        story.state.objectImages.e.src = "img/e.png";
-        for (var obj in story.state.objectImages) {
-            story.state.objectImages[obj].setAttribute("id", "object_" + obj);
-        };
+        story.state.objectImages.t = "<img src='img/t.png'>";
+        story.state.objectImages.z = "<img src='img/z.png'>";
+        story.state.objectImages.c = "<img src='img/c.png'>";
+        story.state.objectImages.p = "<img src='img/p.png'>";
+        story.state.objectImages.f = "<img src='img/f.png'>";
+        story.state.objectImages.s = "<img src='img/s.png'>";
+        story.state.objectImages.e = "<img src='img/e.png'>";
         
         story.state.clockImage = new Image();
         story.state.clockImage.src = "img/hourglass.gif";
@@ -377,7 +374,7 @@ document.luisquin = {
             $hero.css("width", "64");
             $hero.css("height", "64");
             var heroX = this.$map.position().left + (coords.x*this.kx) - this.$hero.width()/4;
-            var heroY = this.$map.position().top + (coords.y*this.ky) - this.$hero.height()/8;
+            var heroY = this.$map.position().top + (coords.y*this.ky) - this.$hero.height()/4;
             $hero.animate({
                 left:   heroX+"px",
                 top:    heroY+"px"
@@ -539,7 +536,7 @@ document.luisquin = {
         }
     },
     takeObject: function(obj, pause) {
-        $("#info-panel").append(story.state.objectImages[obj]);
+        $(".objects").append('<div class="item item-image" id="object_'+obj+'">' + story.state.objectImages[obj] + '</div>');
         if (!pause || isNaN(pause)) pause = 0;
         story.state.objects += obj;
         $("#object_"+obj).hide().delay(pause).fadeIn(1500);
