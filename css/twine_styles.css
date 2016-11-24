@@ -9,15 +9,6 @@ body {
     display: none;
 }
 
-a:hover {
-    background-color: none;
-}
-
-a.closed-exit:hover {
-    background-color: red;
-    cursor: not-allowed;
-}
-
 #event-window {
     background-color: white;
     opacity:    0.75; 

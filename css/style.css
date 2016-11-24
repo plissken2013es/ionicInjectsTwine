@@ -26,6 +26,20 @@ body {
     width:100%;
 }
 
+a {
+    color: darkslategrey;
+    font-weight: bold;
+    background-color: azure;
+}
+a:-webkit-any-link {
+    text-emphasis: none;
+}
+
+a.closed-exit {
+    background-color: lightsalmon;
+    text-decoration: line-through;
+}
+
 .row-wrap {
     flex-wrap: wrap;
 }
@@ -153,9 +167,28 @@ body {
 }
 
 /* -------- modal START-----------*/
-.card {
-    box-shadow: none;
+#modalClock {
+    opacity: 0.65;
 }
-.title {
+#modalClock .card {
+    box-shadow: none
+}
+.modal .title {
     font-family: 'Balloon', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}
+@keyframes blink {  
+    0% { color: red; }
+    100% { color: white; }
+}
+@-webkit-keyframes blink {
+    0% { color: red; }
+    100% { color: white; }
+}
+.blink {
+    -webkit-animation: blink 0.25s linear infinite;
+    -moz-animation: blink 0,25s linear infinite;
+    animation: blink 0.25s linear infinite;
+} 
+.vertical-center {
+    margin-top: 50%;
 }

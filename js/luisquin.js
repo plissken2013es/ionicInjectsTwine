@@ -248,7 +248,7 @@ document.luisquin = {
             if (story.state.alreadyVisited[exit] && !document.luisquin.passageHasTag(exit, "multi")) {
                 $(this).addClass("closed-exit");
                 $(this).removeAttr("data-passage");
-                console.error(exit, " parece haber sido visitada con anterioridad.");
+                console.info(exit, " parece haber sido visitada con anterioridad.");
             }
         });
     },
@@ -257,10 +257,10 @@ document.luisquin = {
             this.$scope.openModalClock();
             setTimeout(function() {
                 this.$scope.closeModalClock();
-            }.bind(this), 2500);
+            }.bind(this), 2000);
             setTimeout(function() {
                 document.luisquin.decrementClock();
-            }.bind(this), 3000);
+            }.bind(this), 2500);
         }
     },
     createLetterOptions: function(letterExcluded) {
@@ -282,7 +282,11 @@ document.luisquin = {
         if (story.state.numClocks < 0) {
             story.show(70); // ending by time run out
         } else {
-            $("#timeIndicator h2").text(story.state.numClocks);
+            $("#timeIndicator h2").addClass("blink").fadeOut("slow", function() {
+                $(this).text(story.state.numClocks);
+            }).fadeIn("slow", function() {
+                $(this).removeClass("blink");
+            });
         }
     },
     decrementLives: function(dmg) {
@@ -340,23 +344,18 @@ document.luisquin = {
         console.log("launchHabilitySelection at", ev.data);
         console.log(this.$scope);
         var psgName = ev.data;
-        this.$scope.openModal(psgName);
         var s = story.state;
-        $("#event-window").append("<div id='hability-selection'></div>").css("opacity", 0.9);
-        for (var q=0; q<story.state.habilities.length; q++) {
-            $("#hability-selection").append("<button class='numberBtn' id='hab_" + story.state.habilities[q] + "'>"+story.state.habilities[q]+"</button>");
-            $("#hab_" + story.state.habilities[q]).bind("click", {index: story.state.habilities[q]}, function(ev, data) {
-                document.luisquin.useHability(ev.data.index);
-            });
-        }
-        $("#hability-selection").append("<button class='numberBtn' id='close-hability-selection'>X</div>");
-        $("#close-hability-selection").bind("click", function(ev, data) {
-            $("#event-window").fadeOut(750, function() {
-                $("#event-window").css("opacity", 0.75);
-                $("#hability-selection").remove();
-            });
+        this.$scope.openModalHabilities(psgName, s.habilities);
+        $(".button-small").each(function(i, btn) {
+            if ($(this).css("display") == "block") {
+                console.log($(this).attr("id").substr(3));
+                $(this).unbind("click");
+                $(this).bind("click", {index: story.state.habilities[$(this).attr("id").substr(3)-1]}, function(ev, data) {
+                    console.log("clicked", ev.data.index);
+                    document.luisquin.useHability(ev.data.index);
+                });
+            }
         });
-        $("#event-window").fadeIn(750);
     },
     loadScope: function(ionicScope) {
         console.log(ionicScope);
@@ -546,17 +545,11 @@ document.luisquin = {
         $("#object_"+obj).hide().delay(pause).fadeIn(1500);
     },
     useHability: function(habNumber) {
+        console.log("useHability", habNumber);
         document.luisquin.removeHability(habNumber);
-        $("#habPanel_" + habNumber + ", #hab_" + habNumber).fadeOut(750, function() {
-            $(this).remove();
-        });
+        this.$scope.closeModalHabilities();
         story.state.habilityInUse = habNumber;
-        $("#event-window").delay(750).fadeOut(750, function() {
-            $("#event-window").css("opacity", 0.75);
-            $("#hability-selection").remove();
-            $("#solution-panel").remove();
-            console.log("going to ", story.state.habilityTarget+1);
-            story.show(Number(story.state.habilityTarget+1));
-        });
+        console.log("going to ", story.state.habilityTarget+1);
+        story.show(Number(story.state.habilityTarget+1));
     }
 };
