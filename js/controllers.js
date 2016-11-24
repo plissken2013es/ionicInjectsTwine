@@ -5,6 +5,7 @@ angular.module("countdown.controllers", [])
     $scope.twineContainers = '<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script>';
     $scope.userScripts = [];
         
+    // --------------- modals -------------------------------------
     $ionicModal.fromTemplateUrl("templates/modalHabilities.html", {
         scope: $scope,
         animation: "slide-in-up"
@@ -27,7 +28,7 @@ angular.module("countdown.controllers", [])
     $scope.openModalHabilities = function(psg, hab) {
         console.log("ionic open modal Habilities", psg, hab);
         $scope.modalHabilities.show();
-        $(".button-small").hide();
+        $("#habilitySelection .button-small").hide();
         hab.forEach(function(val, i) {
             $("#btn"+val).show();
         });
@@ -52,6 +53,7 @@ angular.module("countdown.controllers", [])
     $scope.closeModalObject = function() {
         $scope.modalObject.hide();
     };
+    // --------------- modals -------------------------------------
     
     $scope.checkAppStart = function() {
         if ($scope.itemsToLoad <= 0) {

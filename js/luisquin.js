@@ -1,14 +1,6 @@
 $(window).on('showpassage', function(){
 	console.log('showpassage event', window.passage.name);
 	if (!story.state.isWrapperPresent) {
-		/*$("body").prepend("<div id='wrapper'></div>");
-		$("#wrapper").append("<div id='fake-passage'></div>");
-		$("#fake-passage").hide();
-        $("#wrapper").append("<div id='event-window'></div>");
-		$("#event-window").hide();
-        $("#wrapper").append("<div id='info-panel'></div>");
-        $("#wrapper").append("<div id='habilities-panel'></div>");
-        $("#wrapper").append("<div id='map-panel'></div>");*/
         document.luisquin.init();
 		story.state.isWrapperPresent = true;
 	}
@@ -193,32 +185,24 @@ document.luisquin = {
         story.state.objectImages.e_tit  = "Alcohol 96º";
         story.state.objectImages.e_desc = "La utilidad médica de esta sustancia es innegable.";
         
-        story.state.clockImage = new Image();
-        story.state.clockImage.src = "img/hourglass.gif";
-        
-        story.state.numClocks = 15;
-        
         story.state.alreadyVisited = [];
         for (var q=story.passages.length-1; q--;) {
             story.state.alreadyVisited[q] = false;
         }
         console.log(story.state.alreadyVisited);
         
+        story.state.clockImage = new Image();
+        story.state.clockImage.src = "img/hourglass.gif";
+        story.state.numClocks = 15;
         $("#timeIndicator h2").text(story.state.numClocks);
-        
-        story.state.habilities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        $("#habilities-panel").children().each(function(i) {
-            $(this).remove();
-        });
-        $("#habilities-panel").append("<div id='habilities-panel-title'>Habilidad (#)</div>");
-        for (q=0; q<story.state.habilities.length; q++) {
-            $("#habilities-panel").append("<span class='numberBtn noHover' id='habPanel_" + story.state.habilities[q] + "'>"+story.state.habilities[q]+"</span>");
-        }
-        $("#habilities-panel").append("<span id='lives'></span>");
-        $("#habilities-panel").append("<div id='habilities-panel-title2'>Vidas</div>");
         
         story.state.numLives = 5;
         $("#lifeIndicator h2").text(story.state.numLives);
+        
+        story.state.habilities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        $(".habilities").children().each(function(i) {
+            $(this).show();
+        });
     },
     calculateMapProportions: function() {
         if (!this.$hero) this.$hero = $("#hero");
@@ -358,17 +342,13 @@ document.luisquin = {
         console.log("launchHabilitySelection at", ev.data);
         console.log(this.$scope);
         var psgName = ev.data;
-        var s = story.state;
-        this.$scope.openModalHabilities(psgName, s.habilities);
-        $(".button-small").each(function(i, btn) {
-            if ($(this).css("display") == "block") {
-                console.log($(this).attr("id").substr(3));
-                $(this).unbind("click");
-                $(this).bind("click", {index: story.state.habilities[$(this).attr("id").substr(3)-1]}, function(ev, data) {
-                    console.log("clicked", ev.data.index);
-                    document.luisquin.useHability(ev.data.index);
-                });
-            }
+        this.$scope.openModalHabilities(psgName, story.state.habilities);
+        $("#habilitySelection .button-small").each(function(i, btn) {
+            $(this).unbind("click");
+            $(this).bind("click", {index: $(this).attr("id").substr(3)}, function(ev, data) {
+                console.log("clicked", ev.data.index);
+                document.luisquin.useHability(ev.data.index);
+            });
         });
     },
     loadScope: function(ionicScope) {
@@ -462,12 +442,14 @@ document.luisquin = {
         }
     },
     removeHability: function(habNumber) {
+        console.log("removing hability", habNumber);
         for (var q = 0; q < story.state.habilities.length; q++) {
-            if (story.state.habilities[q] === habNumber) {
+            if (story.state.habilities[q] == habNumber) {
                 story.state.habilities.splice(q, 1);
                 break;
             }
         }
+        $("#hab_"+(habNumber)).fadeOut(1500);
     },
     removeLetterFromArray: function(letter, arr) {
         for (var q=arr.length; q--;) {
