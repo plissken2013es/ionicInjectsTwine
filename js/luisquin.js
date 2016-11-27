@@ -158,7 +158,7 @@ document.luisquin = {
         story.state.objectImages.s      = "<img src='img/s.png'>";
         story.state.objectImages.s_b_img= "img/s_big.png";
         story.state.objectImages.s_big  = "img/s_big.png";
-        story.state.objectImages.s_tit  = "Veneno";
+        story.state.objectImages.s_tit  = "Ácido sulfúrico";
         story.state.objectImages.s_desc = "Sustancia tóxica. No es recomendable ingerirla o que entre en contacto con la piel.";
         
         story.state.objectImages.p      = "<img src='img/p.png'>";
@@ -181,7 +181,7 @@ document.luisquin = {
         
         story.state.objectImages.e      = "<img src='img/e.png'>";
         story.state.objectImages.e_b_img= "img/e_big.png";
-        story.state.objectImages.e_big  = "img/e.png";
+        story.state.objectImages.e_big  = "img/e_big.png";
         story.state.objectImages.e_tit  = "Alcohol 96º";
         story.state.objectImages.e_desc = "La utilidad médica de esta sustancia es innegable.";
         
