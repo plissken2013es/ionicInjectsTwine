@@ -300,19 +300,6 @@ document.luisquin = {
                 story.show(73); // ending by health damage
             }
         });
-        /*var count = 0;
-        while (dmg > 0) {
-            console.log(">", dmg);
-            $("#lives>img:eq("+count+")").delay(count*1000).fadeOut(1000, function() {
-                $(this).remove();
-                if ($("#lives").children().length === 0) {
-                    console.log("dead!");
-                    story.show(73); // ending by health damage
-                }
-            });
-            count++;
-            dmg--;
-        }*/
     },
     drawMap: function() {
         var currentPsg = Number(window.passage.id);
@@ -386,7 +373,8 @@ document.luisquin = {
                 left:   heroX+"px",
                 top:    heroY+"px"
             }, 
-            1500, 
+            1000, 
+            "linear",
             function() {
                 // Animation complete.
                 console.log("hero animation complete!");
