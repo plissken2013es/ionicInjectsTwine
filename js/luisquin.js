@@ -290,7 +290,17 @@ document.luisquin = {
     decrementLives: function(dmg) {
         dmg = Number(dmg);
         story.state.numLives -= dmg;
-        var count = 0;
+        if (story.state.numLives <= 0) story.state.numLives = 0;
+        $("#lifeIndicator h2").addClass("blink").fadeOut("slow", function() {
+            $(this).text(story.state.numLives);
+        }).fadeIn("slow", function() {
+            $(this).removeClass("blink");
+            if (story.state.numLives == 0) {
+                console.log("dead!");
+                story.show(73); // ending by health damage
+            }
+        });
+        /*var count = 0;
         while (dmg > 0) {
             console.log(">", dmg);
             $("#lives>img:eq("+count+")").delay(count*1000).fadeOut(1000, function() {
@@ -302,7 +312,7 @@ document.luisquin = {
             });
             count++;
             dmg--;
-        }
+        }*/
     },
     drawMap: function() {
         var currentPsg = Number(window.passage.id);
