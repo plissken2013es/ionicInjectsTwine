@@ -18,7 +18,7 @@ $(window).on('showpassage:after', function() {
             $(this).remove();
         });
         $el.css("overflow-y", "scroll");
-        $el.css("height", ($(".pane").height() - $el.parent().position().top + 15)+"px");
+        $el.css("height", ($(".pane").height() - $el.parent().position().top + 20)+"px");
         console.log("calculando posición textos:", $(".pane").height(), " - ", $el.parent().position().top, $(".pane").height() - $el.parent().position().top);
 
         $el.show();
