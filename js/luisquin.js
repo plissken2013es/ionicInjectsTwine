@@ -42,6 +42,12 @@ $(window).on('showpassage:after', function() {
             $(".information").fadeIn("slow");
             $(".map").fadeIn("slow");
         }
+        if (window.passage.id == 1) {
+            setTimeout(function() {
+                console.info("lanzamos ilustración intro");
+                this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de introducción
+            }.bind(document.luisquin), 1500);
+        }
     }
     
 	console.log('showpassage:after event', window.passage.name, passage.tags);

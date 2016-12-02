@@ -30,6 +30,12 @@ angular.module("countdown.controllers", [])
     }).then(function(modal) {
         $scope.modalMistery = modal;
     });
+    $ionicModal.fromTemplateUrl("templates/modalEvents.html", {
+        scope: $scope,
+        animation: "slide-in-up"
+    }).then(function(modal) {
+        $scope.modalEvent = modal;
+    });
     
     $scope.openModalHabilities = function(psg, hab) {
         console.log("ionic open modal Habilities", psg, hab);
@@ -49,7 +55,7 @@ angular.module("countdown.controllers", [])
     };
     $scope.closeModalMisteries = function() {
         $scope.modalMistery.hide();
-    };    
+    };          
     $scope.openModalClock = function() {
         console.log("ionic open modal clock");
         $scope.modalClock.show();
@@ -66,6 +72,13 @@ angular.module("countdown.controllers", [])
     };
     $scope.closeModalObject = function() {
         $scope.modalObject.hide();
+    };
+    $scope.openModalEvents = function() {
+        console.log("ionic open modal Events");
+        $scope.modalEvent.show();
+    };
+    $scope.closeModalEvents = function() {
+        $scope.modalEvent.hide();
     };
     // --------------- modals -------------------------------------
     
