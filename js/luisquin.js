@@ -411,32 +411,35 @@ document.luisquin = {
     },
     onLetterClicked: function(letter) {
         letter = letter.toLowerCase();
-        console.log("letter:", letter);
+        console.log("letter chosen:", letter);
         $("#solution-text").text($("#solution-text").text() + letter);
         console.log(letter, story.state.letterCodes[letter]);
         $("#solution-number").text(parseInt($("#solution-number").text()) - story.state.letterCodes[letter]);
 
         if (++story.state.currentPos > story.state.solution.length-1) {
-            console.log("should end!");
-            $(".letterBtn").remove();
+            console.log("mistery should end now!");
+            $("#letterSelection .button-small").remove();
             if ($("#solution-text").text() === story.state.solution) {
-                console.log("Hemos acertado!!!");
-                $("#event-window").fadeOut(750, function() {
-                    $("#event-window").css("opacity", 0.75);
-                    $("#hability-selection").remove();
-                    $("#solution-panel").remove();
-                    document.luisquin.removePassageTags(story.state.toRemove);
-                    story.show(Number(story.state.success)+1);
-                });
+                console.log("Mistery solved!");
+                this.$scope.closeModalMisteries();
+                document.luisquin.removePassageTags(story.state.toRemove);
+                story.show(Number(story.state.success)+1);
+            } else {
+                $("#letterSelection .button-small").remove();
+                setTimeout(function() {
+                    this.$scope.closeModalMisteries();
+                    story.show(Number(story.state.failure)+1);
+                }.bind(this), 1500);
             }
             return;
         }
         var letterOptions = document.luisquin.createLetterOptions(story.state.solution.charAt(story.state.currentPos));
-        $(".letterBtn").remove();
+        $("#letterSelection .button-small").remove();
         for (var w=0; w<letterOptions.length; w++) {
-            $("#hability-selection").prepend("<button class='numberBtn letterBtn' id='letter_" + letterOptions[w] + "'>" + letterOptions[w] + "</button>");
+            var btn = '<a class="button button-small button-outline button-positive" id="letter_' + letterOptions[w] + '">'+letterOptions[w]+'</a>';
+            $("#letterSelection .button-bar").append(btn);
             $("#letter_" + letterOptions[w]).unbind("click").bind("click", {letter: letterOptions[w]}, function(ev, data) {
-                console.log("clicked " + ev.data.letter);
+                console.log("clicked letter " + ev.data.letter);
                 document.luisquin.onLetterClicked(ev.data.letter);
             });
         }
@@ -510,36 +513,23 @@ document.luisquin = {
     solveMistery: function(psgName) {
         console.log("solve mistery at", psgName);
         var s = story.state;
-        /*
-        var answer = prompt("¿Cuál es la respuesta? " + s.solution + " " + s.success + " " + s.failure);
-        if (String(answer).toLocaleLowerCase() === s.solution) {
-            document.luisquin.removePassageTags(s.toRemove);
-            story.show(Number(s.success)+1);
-        } else {
-            story.show(Number(s.failure)+1);
-        }
-        */
         story.state.currentPos = 0;
-        $("#event-window").append("<div id='hability-selection'></div>").css("opacity", 0.9);
         var letterOptions = document.luisquin.createLetterOptions(s.solution.charAt(story.state.currentPos));
+        this.$scope.openModalMisteries();
         for (var w=0; w<letterOptions.length; w++) {
-            $("#hability-selection").append("<button class='numberBtn letterBtn' id='letter_" + letterOptions[w] + "'>" + letterOptions[w] + "</button>");
+            var btn = '<a class="button button-small button-outline button-positive" id="letter_' + letterOptions[w] + '">'+letterOptions[w]+'</a>';
+            $("#letterSelection .button-bar").append(btn);
             $("#letter_" + letterOptions[w]).unbind("click").bind("click", {letter: letterOptions[w]}, function(ev, data) {
-                console.log("clicked " + ev.data.letter);
+                console.log("clicked letter " + ev.data.letter);
                 document.luisquin.onLetterClicked(ev.data.letter);
             });
         }
-        $("#event-window").append("<div id='solution-panel'><span id='solution-text'></span>&nbsp;<span id='solution-number'>" + document.luisquin.sumLetters(s.solution) + "</span></div>");
-        $("#hability-selection").append("<button class='numberBtn' id='close-hability-selection'>X</div>");
-        $("#close-hability-selection").bind("click", function(ev, data) {
-            $("#event-window").fadeOut(750, function() {
-                $("#event-window").css("opacity", 0.75);
-                $("#hability-selection").remove();
-                $("#solution-panel").remove();
-                story.show(Number(s.failure)+1);
-            });
-        });
-        $("#event-window").fadeIn(750);
+        $("#solution-number").text(document.luisquin.sumLetters(s.solution));
+        $("#solution-text").text("");
+        $("#close-button").unbind().bind("click", function(ev, data) {
+            this.$scope.closeModalMisteries();
+            story.show(Number(s.failure)+1);
+        }.bind(this));
     },
     sumLetters: function(text) {
         var sum = 0;
