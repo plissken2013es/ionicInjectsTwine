@@ -532,7 +532,7 @@ Seguro que usa guantes para no dejar huellas, pero el inseparable ADN no perdona
 
 Guardas el pelo en una bolsita de tu maletín y sales de  la sala con nuevo aliento. 
 &lt;%
-document.luisquin.recoverHability();
+document.luisquin.launchRecoverHabilitySelection();
 %&gt;
 [[Recuperas un #.-&gt;8]]</tw-passagedata>
 <tw-passagedata pid="67" name="66" tags="" position="350,1250">&lt;%

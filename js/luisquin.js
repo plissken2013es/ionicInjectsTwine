@@ -340,6 +340,7 @@ document.luisquin = {
         console.log(this.$scope);
         var psgName = ev.data;
         this.$scope.openModalHabilities(psgName, story.state.habilities);
+        $("#modal .title").text("Usa puntos de aventura");
         $("#habilitySelection .button-small").each(function(i, btn) {
             $(this).unbind("click");
             $(this).bind("click", {index: $(this).attr("id").substr(3)}, function(ev, data) {
@@ -347,6 +348,28 @@ document.luisquin = {
                 document.luisquin.useHability(ev.data.index);
             });
         });
+    },
+    launchRecoverHabilitySelection: function(ev) {
+        var remainingHabilities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        story.state.habilities.forEach(function(h, i) {
+            var q=remainingHabilities.indexOf(h);
+            if (q > -1) {
+                remainingHabilities.splice(q, 1);
+            }
+        });
+        if (remainingHabilities.length) {
+            setTimeout(function() {
+                this.$scope.openModalHabilities("dummyDesdobles", remainingHabilities);
+                $("#modal .title").text("Recupera puntos de aventura");
+                $("#habilitySelection .button-small").each(function(i, btn) {
+                    $(this).unbind("click");
+                    $(this).bind("click", {index: $(this).attr("id").substr(3)}, function(ev, data) {
+                        console.log("clicked", ev.data.index);
+                        document.luisquin.recoverHability(ev.data.index);
+                    });
+                });
+            }.bind(this), 2500);
+        }
     },
     loadScope: function(ionicScope) {
         console.log(ionicScope);
@@ -427,14 +450,14 @@ document.luisquin = {
         }
         return false;
     },
-    recoverHability: function() {
+    recoverHability: function(habNumber) {
         for (var q = 0; q<10; q++) {
-            console.log("comprobando", q, story.state.habilities[q])
+            console.log("recoverHability comprobando", q, story.state.habilities[q]);
             if (story.state.habilities[q] !== q+1) {
                 console.log("no es igual a", q+1);
                 story.state.habilities.splice(q, 0, q+1);
-                $("#habilities-panel").append("<span class='numberBtn noHover' id='habPanel_" + (q+1) + "'>"+(q+1)+"</span>");
-                $("#habPanel_"+(q+1)).hide().fadeIn(1500);
+                this.$scope.closeModalHabilities();
+                $("#hab_"+(q+1)).hide().delay(1000).fadeIn(1500);
                 break;
             }
         }
