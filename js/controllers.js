@@ -1,6 +1,6 @@
 angular.module("countdown.controllers", [])
 
-.controller('GameCtrl', function($scope, HttpService, CountdownFactory, $ionicModal) {
+.controller('GameCtrl', function($scope, HttpService, CountdownFactory, $ionicModal, $ionicPlatform) {
     // handling hardware back button
     $ionicPlatform.registerBackButtonAction(function (event) {
         navigator.app.exitApp();

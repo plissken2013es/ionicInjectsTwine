@@ -50,28 +50,28 @@ $(window).on('showpassage:after', function() {
                 console.info("lanzamos ilustración intro");
                 this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de introducción
                 $("#itemImg").attr("src", "img/evt/prologo.jpg");
-            }.bind(document.luisquin), 2500);
+            }.bind(document.luisquin), 4500);
         }
         if (window.passage.id == 33) {
             setTimeout(function() {
                 console.info("lanzamos ilustración victoria");
                 this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de VICTORIA
                 $("#itemImg").attr("src", "img/evt/win.png");
-            }.bind(document.luisquin), 2500);
+            }.bind(document.luisquin), 3500);
         }
         if (deathImg.indexOf(window.passage.id) > -1) {
             setTimeout(function() {
                 console.info("lanzamos ilustración muerte");
                 this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de MUERTE
                 $("#itemImg").attr("src", "img/evt/muerte.jpg");
-            }.bind(document.luisquin), 2500);
+            }.bind(document.luisquin), 3500);
         }
         if (imgPsg.indexOf(Number(window.passage.name)) > -1) {
             setTimeout(function() {
                 console.info("lanzamos ilustración", window.passage.name);
                 this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de introducción
                 $("#itemImg").attr("src", "img/evt/"+Number(window.passage.name)+".jpg");
-            }.bind(document.luisquin), 2500);
+            }.bind(document.luisquin), 3500);
         }
     }
     
@@ -102,7 +102,7 @@ $(window).on('hidepassage', function() {
 });
 
 document.luisquin = {
-    TEXT_TOUT: 150,
+    TEXT_TOUT: 1000,
     MUSIC_ON:   false,
     init: function() {
         document.story = story;
