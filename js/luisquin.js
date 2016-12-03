@@ -38,6 +38,7 @@ $(window).on('showpassage:after', function() {
     
     function checkIntroPassages() {
         var introPsg = [1, 2, 8];
+        var imgPsg = [1,2,6,7,14,34,41,47,49,51,58,63,66];
         if (introPsg.indexOf(Number(window.passage.id)) < 0) {
             $(".information").fadeIn("slow");
             $(".map").fadeIn("slow");
@@ -46,7 +47,14 @@ $(window).on('showpassage:after', function() {
             setTimeout(function() {
                 console.info("lanzamos ilustración intro");
                 this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de introducción
-            }.bind(document.luisquin), 1500);
+            }.bind(document.luisquin), 2500);
+        }
+        if (imgPsg.indexOf(Number(window.passage.name)) > -1) {
+            setTimeout(function() {
+                console.info("lanzamos ilustración", window.passage.name);
+                this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de introducción
+                $("#itemImg").attr("src", "img/evt/"+Number(window.passage.name)+".jpg");
+            }.bind(document.luisquin), 2500);
         }
     }
     
