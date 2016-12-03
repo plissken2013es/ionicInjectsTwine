@@ -298,7 +298,7 @@ if (s.objects.indexOf(&quot;t&quot;) &gt;= 0) { %&gt;
 &lt;% } else { %&gt;
 [[No hay nada que hacer aquí.-&gt;8]]
 &lt;% }%&gt;</tw-passagedata>
-<tw-passagedata pid="33" name="32" tags="" position="50,650">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/victoria.png&quot; alt=&quot;¡Victoria!&quot; /&gt;
+<tw-passagedata pid="33" name="32" tags="" position="50,650">
 
 Sacas las tijeras de tu maletín y cortas el cable. En apariencia no ocurre nada;  eso puede ser buena señal o muy mala. 
 
@@ -505,8 +505,7 @@ Es entonces  cuando el fax, que por lo visto sí estaba operativo, vuelve a la v
 “¿Por qué consumes segundos buscando aquí?  Tendrás que hacerlo mejor”. 
 
 [[Sin comentarios.-&gt;12]]</tw-passagedata>
-<tw-passagedata pid="61" name="60" tags="" position="651,1100">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/fin.jpg&quot; alt=&quot;Es tu fin&quot; /&gt;
-
+<tw-passagedata pid="61" name="60" tags="" position="651,1100">
 Nada más cortar el cable adviertes que has errado; súbitamente, la cuenta  atrás del temporizador se acelera de manera radical y los segundos devienen centésimas.
 
 Rocko te ha vencido y estás condenado. 
@@ -543,7 +542,7 @@ Cuando empujas la puerta para entrar, una caja de cartón llena de trofeos  depo
 [[Usa un # y réstaselo a tu Salud.-&gt;#]] </tw-passagedata>
 <tw-passagedata pid="68" name="67" tags="" position="500,1250">[[Extraes las tijeras de tu maletín y cortas el cable.-&gt;60]]</tw-passagedata>
 <tw-passagedata pid="69" name="X" tags="" position="1334,208">Haz doble clic sobre este pasaje para editarlo.</tw-passagedata>
-<tw-passagedata pid="70" name="69" tags="" position="658,1246">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/fin.jpg&quot; alt=&quot;Es tu fin&quot; /&gt;
+<tw-passagedata pid="70" name="69" tags="" position="658,1246">
 
 Se ha agotado tu tiempo.
 
@@ -559,7 +558,7 @@ FIN.
 document.luisquin.decrementLives(s.habilityInUse);
 %&gt;
 [[Maldice  a Rocko y luego registra el aula.-&gt;26]]</tw-passagedata>
-<tw-passagedata pid="73" name="72" tags="" position="798,1246">&lt;img src=&quot;http://www.luisquin.es/lq/laCuentaAtras/img/fin.jpg&quot; alt=&quot;Es tu fin&quot; /&gt;
+<tw-passagedata pid="73" name="72" tags="" position="798,1246">
 
 Has sufrido demasiado daño.
 

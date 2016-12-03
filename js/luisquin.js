@@ -39,6 +39,7 @@ $(window).on('showpassage:after', function() {
     function checkIntroPassages() {
         var introPsg = [1, 2, 8];
         var imgPsg = [1,2,6,7,14,34,41,47,49,51,58,63,66];
+        var deathImg = [61,70,73];
         if (introPsg.indexOf(Number(window.passage.id)) < 0) {
             $(".information").fadeIn("slow");
             $(".map").fadeIn("slow");
@@ -47,6 +48,21 @@ $(window).on('showpassage:after', function() {
             setTimeout(function() {
                 console.info("lanzamos ilustración intro");
                 this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de introducción
+                $("#itemImg").attr("src", "img/evt/prologo.jpg");
+            }.bind(document.luisquin), 2500);
+        }
+        if (window.passage.id == 33) {
+            setTimeout(function() {
+                console.info("lanzamos ilustración victoria");
+                this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de VICTORIA
+                $("#itemImg").attr("src", "img/evt/win.png");
+            }.bind(document.luisquin), 2500);
+        }
+        if (deathImg.indexOf(window.passage.id) > -1) {
+            setTimeout(function() {
+                console.info("lanzamos ilustración muerte");
+                this.$scope.openModalEvents(); // abrimos la ventana de la ilustración de MUERTE
+                $("#itemImg").attr("src", "img/evt/muerte.jpg");
             }.bind(document.luisquin), 2500);
         }
         if (imgPsg.indexOf(Number(window.passage.name)) > -1) {
