@@ -1,11 +1,12 @@
 angular.module("countdown.controllers", [])
 
-.controller('GameCtrl', function($scope, HttpService, CountdownFactory, $ionicModal, $ionicPlatform) {
+.controller('GameCtrl', function($scope, $state, HttpService, CountdownFactory, $ionicModal, $ionicPlatform) {
     // handling hardware back button
     $ionicPlatform.registerBackButtonAction(function (event) {
         navigator.app.exitApp();
     }, 100);
     
+    $scope.seenIntro = false;
     $scope.itemsToLoad = 2;
     $scope.twineContainers = '<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script>';
     $scope.userScripts = [];
@@ -90,14 +91,46 @@ angular.module("countdown.controllers", [])
     $scope.checkAppStart = function() {
         if ($scope.itemsToLoad <= 0) {
             console.log("app should start now");
-            var interval = setInterval(function() {
-                if (window.story) {
-                    window.story.userScripts = $scope.userScripts;
-                    window.story.start();
-                    document.luisquin.loadScope($scope);
-                    clearInterval(interval);
-                }
-            }.bind(this), 250);
+            
+            if ($scope.seenIntro) {
+                var interval = setInterval(function() {
+                    if (window.story) {
+                        window.story.userScripts = $scope.userScripts;
+                        window.story.start();
+                        document.luisquin.loadScope($scope);
+                        clearInterval(interval);
+                    }
+                }.bind(this), 250);
+            } else {
+                console.log("should launch intro now");
+                
+                var $logo = $("#logo");
+                var $wrapper = $("#wrapper");
+                var $pane = $(".pane");
+                $logo.attr("src", "../img/carpenterSoft_logo_200.gif").delay(6000).fadeOut("slow", function() {
+                    $logo.remove();
+                    var content = "<div id='credits'><p>Una historia de:<br/>Fernando Lafuente</p><p>Ilustrada por:<br/>Nombre Ilustrador</p></div>";
+                    $("#cover").append(content);
+                    $("#credits").delay(1000).fadeIn("slow").delay(4000).fadeOut("slow", function() {
+                        $wrapper.addClass("coverImage");
+                        $pane.fadeOut("slow", function() {
+                            $pane.css("backgroundColor", "transparent").fadeIn("slow", function() {
+                                $wrapper.addClass("backgroundImage").removeClass("coverImage");
+                                $("#credits").remove();
+                                content = "<div id='title'><p>Cuenta Atrás</p></div>";
+                                $("#cover").append(content);
+                                $pane.addClass("coverImage").delay(4000).fadeOut("slow", function() {
+                                    $("#title").remove();
+                                    $("#cover").remove();
+                                    $pane.fadeIn("slow");
+                                    $scope.seenIntro = true;
+                                    $scope.checkAppStart();
+                                }.bind(this));
+                            }.bind(this));
+                        }.bind(this));
+                    }.bind(this));
+                });
+            }
         }
     };
     
@@ -130,7 +163,7 @@ angular.module("countdown.controllers", [])
                             $scope.itemsToLoad--;
                             $scope.checkAppStart();
                         });
-                });  
+                });
             // get custom CSS styles
             HttpService.getTwineCSS()
                 .then(function(css) {

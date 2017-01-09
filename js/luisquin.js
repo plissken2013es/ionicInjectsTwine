@@ -1,7 +1,8 @@
 $(window).on('showpassage', function(){
 	console.log('showpassage event', window.passage.name);
 	if (!story.state.isWrapperPresent) {
-        document.luisquin.startMusic();
+        //document.luisquin.startMusic();
+        $("#background").addClass("backgroundImage");
         document.luisquin.init();
 		story.state.isWrapperPresent = true;
 	}

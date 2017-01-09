@@ -27,4 +27,12 @@ angular.module("countdown.services", [])
                 return response.data;
             });
     };
+    this.getIntroScript = function() {
+        // $http returns a promise, which has a then function, which also returns a promise.
+        return $http.get("js/intro.js")
+            .then(function (response) {
+                // In the response, resp.data contains the result. Check the console to see all of the data returned.
+                return response.data;
+            });
+    };
 });
