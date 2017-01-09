@@ -108,12 +108,12 @@ angular.module("countdown.controllers", [])
                 var $logo = $("#logo");
                 var $wrapper = $("#wrapper");
                 var $pane = $(".pane");
-                $logo.attr("src", "../img/carpenterSoft_logo_200.gif").delay(600).fadeOut("slow", function() {
+                $logo.attr("src", "../img/carpenterSoft_logo_200.gif").delay(6000).fadeOut("slow", function() {
                     window.globalStartMusic();
                     $logo.remove();
                     var content = "<div id='credits'><p>Una historia de:<br/>Fernando Lafuente</p><p>Ilustrada por:<br/>Nombre Ilustrador</p></div>";
                     $("#cover").append(content);
-                    $("#credits").delay(1000).fadeIn("slow").delay(400).fadeOut("slow", function() {
+                    $("#credits").delay(1000).fadeIn("slow").delay(4000).fadeOut("slow", function() {
                         $wrapper.addClass("coverImage");
                         $pane.fadeOut("slow", function() {
                             $pane.css("backgroundColor", "transparent").fadeIn("slow", function() {
