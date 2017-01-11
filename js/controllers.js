@@ -105,14 +105,16 @@ angular.module("countdown.controllers", [])
                 console.log("should launch intro now");
                 
                 // this is not the optimal way to launch the intro, but... :S
+                var $cover = $("#cover");
+                $cover.append('<img id="logo" src="../img/carpenterSoft_logo_200.gif">');
                 var $logo = $("#logo");
                 var $wrapper = $("#wrapper");
                 var $pane = $(".pane");
-                $logo.attr("src", "../img/carpenterSoft_logo_200.gif").delay(6000).fadeOut("slow", function() {
+                $logo.delay(6000).fadeOut("slow", function() {
                     window.globalStartMusic();
                     $logo.remove();
                     var content = "<div id='credits'><p>Una historia de:<br/>Fernando Lafuente</p><p>Ilustrada por:<br/>Nombre Ilustrador</p></div>";
-                    $("#cover").append(content);
+                    $cover.append(content);
                     $("#credits").delay(1000).fadeIn("slow").delay(4000).fadeOut("slow", function() {
                         $wrapper.addClass("coverImage");
                         $pane.fadeOut("slow", function() {
@@ -120,9 +122,9 @@ angular.module("countdown.controllers", [])
                                 $wrapper.addClass("backgroundImage").removeClass("coverImage");
                                 $("#credits").remove();
                                 content = "<div id='title'><p>Cuenta Atrás</p></div>";
-                                $("#cover").append(content);
+                                $cover.append(content);
                                 $pane.addClass("coverImage").delay(4000).fadeOut("slow", function() {
-                                    $("#cover").remove();
+                                    $cover.remove();
                                     $pane.removeClass("coverImage").removeClass("backgroundImage").show();
                                     $scope.seenIntro = true;
                                     $scope.checkAppStart();
