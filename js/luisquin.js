@@ -33,7 +33,12 @@ $(window).on('showpassage:after', function() {
                 countWords = 0;
             }
             $el.append(index);
-            index.hide().delay((count+1)*document.luisquin.TEXT_TOUT).fadeIn(1500);
+            index.hide().delay((count+1)*document.luisquin.TEXT_TOUT).fadeIn(1500, function() {
+                console.log("start animation to", index.position());
+                $el.animate({scrollTop:index.position().top}, "750", "swing", function() {
+                    console.log("end animation");
+                });
+            });
             count++;
         });
     }

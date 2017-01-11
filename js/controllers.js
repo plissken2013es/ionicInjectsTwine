@@ -6,7 +6,7 @@ angular.module("countdown.controllers", [])
         navigator.app.exitApp();
     }, 100);
     
-    $scope.seenIntro = false;
+    $scope.seenIntro = true;
     $scope.itemsToLoad = 2;
     $scope.twineContainers = '<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script>';
     $scope.userScripts = [];
