@@ -106,7 +106,7 @@ angular.module("countdown.controllers", [])
                 
                 // this is not the optimal way to launch the intro, but... :S
                 var $cover = $("#cover");
-                $cover.append('<img id="logo" src="../img/carpenterSoft_logo_200.gif">');
+                //$cover.append('<img id="logo" src="../img/carpenterSoft_logo_200.gif">');
                 var $logo = $("#logo");
                 var $wrapper = $("#wrapper");
                 var $pane = $(".pane");
